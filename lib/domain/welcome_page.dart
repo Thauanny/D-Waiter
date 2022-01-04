@@ -1,4 +1,4 @@
-import 'package:d_waiter/modules/authentication/login_page.dart';
+import 'login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,6 +11,7 @@ class WelcomePage extends StatelessWidget {
     return Container(
       color: Theme.of(context).backgroundColor,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 25, left: 25),
@@ -19,12 +20,9 @@ class WelcomePage extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/icons/logo.svg',
                 semanticsLabel: 'logo',
-                height: 86,
-                width: 87,
               ),
             ),
           ),
-          const SizedBox(height: 55),
           const Text(
             'D-Waiter',
             style: TextStyle(
@@ -32,17 +30,17 @@ class WelcomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.none),
           ),
-          const SizedBox(height: 69),
           Stack(children: [
             SvgPicture.asset(
               'assets/images/people.svg',
               semanticsLabel: 'people',
               alignment: Alignment.topCenter,
             ),
-            Positioned(
-              top: 430,
-              left: 20,
-              right: 20,
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 1.7,
+                left: MediaQuery.of(context).size.width / 8,
+              ),
               child: TextButton(
                 style: TextButton.styleFrom(
                   fixedSize: const Size(300, 60),

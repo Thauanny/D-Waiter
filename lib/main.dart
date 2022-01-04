@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'modules/authentication/welcome_page.dart';
+import 'domain/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
