@@ -10,4 +10,8 @@ class FoodService {
       {required String searchText}) async {
     return FoodRepository.fetchSearchFood(searchText: searchText);
   }
+
+  static Future<String> fetchDetailsOfAFood({required String id}) async {
+    return FoodRepository.fetchDetailsOfAFood(id: id);
+  }
 }

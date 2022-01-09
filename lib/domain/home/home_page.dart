@@ -1,6 +1,6 @@
 import 'package:d_waiter/controllers/food_controller.dart';
 import 'package:d_waiter/domain/home/components/text_button_underlined.dart';
-import 'package:d_waiter/domain/views/search_page.dart';
+import 'package:d_waiter/domain/views/see_more_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:d_waiter/shared/components/food_card.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +125,7 @@ class HomePageState extends State {
                     alignment: Alignment.bottomRight,
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => const SearchPage());
+                        Get.to(() => const SeeMorePage());
                       },
                       child: const Text(
                         'See More',
@@ -143,26 +143,30 @@ class HomePageState extends State {
   }
 }
 
-Widget _foodList(BuildContext context) => Obx(
-      () => _foodController.isLoading.value
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: primaryOrange,
-              ),
-            )
-          : SizedBox(
-              height: 400,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, i) => Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: foodCard(context, _foodController.foodList[i]),
-                ),
+Widget _foodList(BuildContext context) {
+  return Obx(
+    () => _foodController.isLoading.value
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: primaryOrange,
+            ),
+          )
+        : SizedBox(
+            height: 400,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _foodController.foodList.length < 5
+                  ? _foodController.foodList.length
+                  : 5,
+              itemBuilder: (context, i) => Padding(
+                padding: const EdgeInsets.all(10),
+                child: foodCard(context, _foodController.foodList[i]),
               ),
             ),
-    );
+          ),
+  );
+}
 
 Widget _searchBar() => TextField(
     decoration: const InputDecoration(

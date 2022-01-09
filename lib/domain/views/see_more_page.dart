@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 
 final FoodController _foodController = Get.put(FoodController());
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+class SeeMorePage extends StatefulWidget {
+  const SeeMorePage({Key? key}) : super(key: key);
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<SeeMorePage> createState() => _SeeMorePageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SeeMorePageState extends State<SeeMorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

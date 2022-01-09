@@ -53,4 +53,23 @@ class FoodRepository {
       return <Food>[];
     }
   }
+
+  static Future<String> fetchDetailsOfAFood({required String id}) async {
+    var response = await client.get(
+      Uri.parse('https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}'),
+    );
+
+    if (response.statusCode == 200) {
+      var responseBody = response.body;
+
+      Map<String, dynamic> jsonBody = jsonDecode(responseBody);
+
+      var details = Map.from(jsonBody.values.first[0]);
+
+      return details['strInstructions'];
+    } else {
+      //show error
+      return 'Not Found';
+    }
+  }
 }

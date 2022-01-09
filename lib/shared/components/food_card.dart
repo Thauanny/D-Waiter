@@ -1,25 +1,31 @@
 import 'package:d_waiter/controllers/food_controller.dart';
 import 'package:d_waiter/domain/models/food.dart';
+import 'package:d_waiter/domain/views/item_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Widget foodCard(BuildContext context, Food food, [isHorizontal = true]) {
-  return Stack(
-    alignment: Alignment.topCenter,
-    children: [
-      Padding(
-        padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
-        child: Container(
-            height: isHorizontal ? 650 : 250,
-            color: isHorizontal ? primaryWhite : Colors.transparent,
-            width: isHorizontal ? 230 : 150,
-            child: _contentCard(isHorizontal)),
-      ),
-      _imageCard(food, isHorizontal),
-      _nameLabe(food, isHorizontal),
-      _priceLabel(food, isHorizontal)
-    ],
+  return InkWell(
+    onTap: () {
+      Get.to(() => ItemPage(food));
+    },
+    child: Stack(
+      alignment: Alignment.topCenter,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
+          child: Container(
+              height: isHorizontal ? 650 : 250,
+              color: isHorizontal ? primaryWhite : Colors.transparent,
+              width: isHorizontal ? 230 : 150,
+              child: _contentCard(isHorizontal)),
+        ),
+        _imageCard(food, isHorizontal),
+        _nameLabe(food, isHorizontal),
+        _priceLabel(food, isHorizontal)
+      ],
+    ),
   );
 }
 
@@ -53,7 +59,7 @@ Widget _nameLabe(Food food, bool isHorizontal) => Padding(
       padding: EdgeInsets.only(top: isHorizontal ? 100.0 : 25),
       child: Center(
         child: SizedBox(
-          width: isHorizontal ? 100 : 60,
+          width: isHorizontal ? 200 : 100,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +86,7 @@ Widget _priceLabel(Food food, bool isHorizontal) => Padding(
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SizedBox(
-          width: 100,
+          width: 200,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
