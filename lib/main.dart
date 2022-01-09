@@ -1,3 +1,4 @@
+import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        backgroundColor: const Color.fromARGB(255, 255, 75, 58),
+        backgroundColor: primaryOrange,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-            .copyWith(secondary: const Color.fromARGB(255, 255, 75, 58)),
+            .copyWith(secondary: primaryOrange),
       ),
       home: const WelcomePage(),
     );

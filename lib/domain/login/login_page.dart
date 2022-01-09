@@ -1,4 +1,5 @@
 import 'package:d_waiter/domain/home/home_page.dart';
+import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class LoginPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 242, 242, 242),
+      backgroundColor: primaryWhite,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -48,7 +49,7 @@ class LoginPageState extends State {
                   ],
                   color: Colors.transparent,
                   decoration: TextDecoration.underline,
-                  decorationColor: Color.fromARGB(255, 250, 74, 12),
+                  decorationColor: primaryOrange,
                   decorationThickness: 3,
                   decorationStyle: TextDecorationStyle.solid,
                 ),

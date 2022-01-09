@@ -1,3 +1,4 @@
+import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,15 +34,13 @@ class TextButtonUnderlinedState extends State<TextButtonUnderlined> {
                 fontSize: widget.fontSize,
                 shadows: [
                   Shadow(
-                      color: pressed.value
-                          ? const Color.fromARGB(255, 250, 74, 12)
-                          : Colors.grey,
+                      color: pressed.value ? primaryOrange : Colors.grey,
                       offset: const Offset(0, -8))
                 ],
                 color: Colors.transparent,
                 decoration:
                     widget.interactable ? TextDecoration.underline : null,
-                decorationColor: const Color.fromARGB(255, 250, 74, 12),
+                decorationColor: primaryOrange,
                 decorationThickness: 3,
                 decorationStyle: TextDecorationStyle.solid,
               ),
