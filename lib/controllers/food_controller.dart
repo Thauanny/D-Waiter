@@ -6,6 +6,8 @@ class FoodController extends GetxController {
   var isLoading = true.obs;
   var foodList = <Food>[].obs;
 
+  var searchText = ''.obs;
+
   @override
   void onInit() {
     fetchFood();
@@ -16,6 +18,17 @@ class FoodController extends GetxController {
     try {
       isLoading(true);
       var foods = await FoodService.fetchFood();
+      foodList.value = foods;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  void fetchSearchFood() async {
+    try {
+      isLoading(true);
+      var foods =
+          await FoodService.fetchSearchFood(searchText: searchText.value);
       foodList.value = foods;
     } finally {
       isLoading(false);

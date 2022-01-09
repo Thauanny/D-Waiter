@@ -28,4 +28,29 @@ class FoodRepository {
       return <Food>[];
     }
   }
+
+  static Future<List<Food>> fetchSearchFood(
+      {required String searchText}) async {
+    var response = await client.get(
+      Uri.parse(
+          'https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}'),
+    );
+
+    if (response.statusCode == 200) {
+      var responseBody = response.body;
+
+      Map<String, dynamic> jsonBody = jsonDecode(responseBody);
+
+      var foodList = <Food>[];
+
+      jsonBody.values.first.forEach((element) {
+        foodList.add(Food.fromMap(element));
+      });
+
+      return foodList;
+    } else {
+      //show error
+      return <Food>[];
+    }
+  }
 }

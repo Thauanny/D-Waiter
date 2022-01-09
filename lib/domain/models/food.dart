@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'dart:math';
+
 List<Food> foodFromJsonToList(String string) => List<Food>.from(
       json.decode(string).map(
             (e) => Food.fromJson(e),
@@ -9,7 +11,7 @@ List<Food> foodFromJsonToList(String string) => List<Food>.from(
 class Food {
   String name;
   String imageUrl;
-  int price;
+  String price;
   int id;
   Food({
     required this.name,
@@ -31,7 +33,9 @@ class Food {
     return Food(
       name: map['strMeal'] ?? '',
       imageUrl: map['strMealThumb'] ?? '',
-      price: map['price']?.toInt() ?? 0,
+      price: Random().nextInt(50).toString() +
+          ',' +
+          Random().nextInt(50).toString(),
       id: int.parse(map['idMeal']),
     );
   }

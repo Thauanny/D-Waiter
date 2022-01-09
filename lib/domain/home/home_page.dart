@@ -1,10 +1,13 @@
 import 'package:d_waiter/controllers/food_controller.dart';
 import 'package:d_waiter/domain/home/components/text_button_underlined.dart';
+import 'package:d_waiter/domain/views/search_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:d_waiter/shared/components/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+final FoodController _foodController = Get.put(FoodController());
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class HomePageState extends State {
     double _navSpaceH = MediaQuery.of(context).size.height / 8;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: primaryWhite,
       body: ListView(children: [
         Column(
@@ -85,19 +89,7 @@ class HomePageState extends State {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 20,
                       ),
-                      const TextField(
-                        decoration: InputDecoration(
-                            fillColor: secondwhite,
-                            filled: true,
-                            prefixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(80)),
-                            ),
-                            hintText: "Search"),
-                        keyboardType: TextInputType.number,
-                      ),
+                      _searchBar(),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 10,
                         child: ListView(
@@ -126,7 +118,22 @@ class HomePageState extends State {
                   ),
                 ),
                 //foods
-                foodCard(context),
+                _foodList(context),
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: InkWell(
+                      onTap: () {
+                        Get.off(() => const SearchPage());
+                      },
+                      child: const Text(
+                        'See More',
+                        style: TextStyle(color: primaryOrange, fontSize: 15),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ],
@@ -135,3 +142,40 @@ class HomePageState extends State {
     );
   }
 }
+
+Widget _foodList(BuildContext context) => Obx(
+      () => _foodController.isLoading.value
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: primaryOrange,
+              ),
+            )
+          : SizedBox(
+              height: 400,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, i) => Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: foodCard(context, _foodController.foodList[i]),
+                ),
+              ),
+            ),
+    );
+
+Widget _searchBar() => TextField(
+    decoration: const InputDecoration(
+        fillColor: secondwhite,
+        filled: true,
+        prefixIcon: Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(80)),
+        ),
+        hintText: "Search"),
+    keyboardType: TextInputType.text,
+    onChanged: (value) {
+      _foodController.searchText.value = value;
+      _foodController.fetchSearchFood();
+    });

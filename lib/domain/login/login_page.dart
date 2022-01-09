@@ -21,6 +21,7 @@ class LoginPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: primaryWhite,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

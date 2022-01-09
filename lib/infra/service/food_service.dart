@@ -5,4 +5,9 @@ class FoodService {
   static Future<List<Food>> fetchFood() async {
     return FoodRepository.fetchFood();
   }
+
+  static Future<List<Food>> fetchSearchFood(
+      {required String searchText}) async {
+    return FoodRepository.fetchSearchFood(searchText: searchText);
+  }
 }
