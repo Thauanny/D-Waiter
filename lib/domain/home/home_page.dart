@@ -125,7 +125,7 @@ class HomePageState extends State {
                     alignment: Alignment.bottomRight,
                     child: InkWell(
                       onTap: () {
-                        Get.off(() => const SearchPage());
+                        Get.to(() => const SearchPage());
                       },
                       child: const Text(
                         'See More',

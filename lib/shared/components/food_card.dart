@@ -12,9 +12,9 @@ Widget foodCard(BuildContext context, Food food, [isHorizontal = true]) {
         padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
         child: Container(
             height: isHorizontal ? 650 : 250,
-            color: primaryWhite,
+            color: isHorizontal ? primaryWhite : Colors.transparent,
             width: isHorizontal ? 230 : 150,
-            child: _contentCard()),
+            child: _contentCard(isHorizontal)),
       ),
       _imageCard(food, isHorizontal),
       _nameLabe(food, isHorizontal),
@@ -23,12 +23,13 @@ Widget foodCard(BuildContext context, Food food, [isHorizontal = true]) {
   );
 }
 
-Widget _contentCard() => Card(
+Widget _contentCard(bool isHorizontal) => Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.0),
       ),
-      shadowColor: Colors.grey.withOpacity(0.3),
-      elevation: 5,
+      shadowColor:
+          isHorizontal ? Colors.grey.withOpacity(0.3) : Colors.transparent,
+      elevation: isHorizontal ? 5 : 0,
     );
 
 Widget _imageCard(Food food, bool isHorizontal) => Card(
