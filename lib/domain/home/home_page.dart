@@ -83,7 +83,8 @@ class HomePageState extends State {
                         child: Text(
                           "Cardápio",
                           textScaleFactor: 1.5,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
                       SizedBox(
@@ -97,18 +98,22 @@ class HomePageState extends State {
                           children: const [
                             TextButtonUnderlined(
                               text: '    Foods    ',
+                              fontSize: 18,
                               interactable: true,
                             ),
                             TextButtonUnderlined(
                               text: '    Drinks    ',
+                              fontSize: 18,
                               interactable: false,
                             ),
                             TextButtonUnderlined(
                               text: '    Snacks    ',
+                              fontSize: 18,
                               interactable: false,
                             ),
                             TextButtonUnderlined(
                               text: '    Sauces    ',
+                              fontSize: 18,
                               interactable: false,
                             ),
                           ],
@@ -151,17 +156,20 @@ Widget _foodList(BuildContext context) {
               color: primaryOrange,
             ),
           )
-        : SizedBox(
-            height: 400,
-            width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: _foodController.foodList.length < 5
-                  ? _foodController.foodList.length
-                  : 5,
-              itemBuilder: (context, i) => Padding(
-                padding: const EdgeInsets.all(10),
-                child: foodCard(context, _foodController.foodList[i]),
+        : Padding(
+            padding: const EdgeInsets.only(left: 40.0),
+            child: SizedBox(
+              height: 400,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _foodController.foodList.length < 5
+                    ? _foodController.foodList.length
+                    : 5,
+                itemBuilder: (context, i) => Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: foodCard(context, _foodController.foodList[i]),
+                ),
               ),
             ),
           ),
@@ -169,15 +177,21 @@ Widget _foodList(BuildContext context) {
 }
 
 Widget _searchBar() => TextField(
+    style: const TextStyle(fontSize: 20),
     decoration: const InputDecoration(
-        fillColor: secondwhite,
-        filled: true,
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(80)),
-        ),
-        hintText: "Search"),
+      fillColor: secondwhite,
+      filled: true,
+      prefixIcon: Icon(
+        Icons.search,
+        color: primaryOrange,
+        size: 35,
+      ),
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.all(Radius.circular(80)),
+      ),
+      hintText: "Search",
+    ),
     keyboardType: TextInputType.text,
     onChanged: (value) {
       _foodController.searchText.value = value;

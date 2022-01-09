@@ -16,13 +16,13 @@ Widget foodCard(BuildContext context, Food food, [isHorizontal = true]) {
         Padding(
           padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
           child: Container(
-              height: isHorizontal ? 650 : 250,
+              height: isHorizontal ? 280 : 250,
               color: isHorizontal ? primaryWhite : Colors.transparent,
-              width: isHorizontal ? 230 : 150,
+              width: isHorizontal ? 250 : 150,
               child: _contentCard(isHorizontal)),
         ),
         _imageCard(food, isHorizontal),
-        _nameLabe(food, isHorizontal),
+        _nameLabel(food, isHorizontal),
         _priceLabel(food, isHorizontal)
       ],
     ),
@@ -48,15 +48,15 @@ Widget _imageCard(Food food, bool isHorizontal) => Card(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
           food.imageUrl,
-          height: isHorizontal ? 170 : 100,
-          width: isHorizontal ? 170 : 100,
+          height: isHorizontal ? 150 : 100,
+          width: isHorizontal ? 150 : 100,
           fit: BoxFit.fill,
         ),
       ),
     );
 
-Widget _nameLabe(Food food, bool isHorizontal) => Padding(
-      padding: EdgeInsets.only(top: isHorizontal ? 100.0 : 25),
+Widget _nameLabel(Food food, bool isHorizontal) => Padding(
+      padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
       child: Center(
         child: SizedBox(
           width: isHorizontal ? 200 : 100,
@@ -82,7 +82,7 @@ Widget _nameLabe(Food food, bool isHorizontal) => Padding(
     );
 
 Widget _priceLabel(Food food, bool isHorizontal) => Padding(
-      padding: const EdgeInsets.only(bottom: 50.0),
+      padding: const EdgeInsets.only(bottom: 100.0),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SizedBox(
