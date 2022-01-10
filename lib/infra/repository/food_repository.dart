@@ -13,16 +13,21 @@ class FoodRepository {
 
     if (response.statusCode == 200) {
       var responseBody = response.body;
+      var responseBodyMap = jsonDecode(responseBody);
+      var responseBodyConverted = Map.from(responseBodyMap);
+      if (responseBodyConverted.values.first == null) {
+        return <Food>[];
+      } else {
+        Map<String, dynamic> jsonBody = jsonDecode(responseBody);
 
-      Map<String, dynamic> jsonBody = jsonDecode(responseBody);
+        var foodList = <Food>[];
 
-      var foodList = <Food>[];
+        jsonBody.values.first.forEach((element) {
+          foodList.add(Food.fromMap(element));
+        });
 
-      jsonBody.values.first.forEach((element) {
-        foodList.add(Food.fromMap(element));
-      });
-
-      return foodList;
+        return foodList;
+      }
     } else {
       //show error
       return <Food>[];
@@ -38,16 +43,21 @@ class FoodRepository {
 
     if (response.statusCode == 200) {
       var responseBody = response.body;
+      var responseBodyMap = jsonDecode(responseBody);
+      var responseBodyConverted = Map.from(responseBodyMap);
+      if (responseBodyConverted.values.first == null) {
+        return <Food>[];
+      } else {
+        Map<String, dynamic> jsonBody = jsonDecode(responseBody);
 
-      Map<String, dynamic> jsonBody = jsonDecode(responseBody);
+        var foodList = <Food>[];
 
-      var foodList = <Food>[];
+        jsonBody.values.first.forEach((element) {
+          foodList.add(Food.fromMap(element));
+        });
 
-      jsonBody.values.first.forEach((element) {
-        foodList.add(Food.fromMap(element));
-      });
-
-      return foodList;
+        return foodList;
+      }
     } else {
       //show error
       return <Food>[];
@@ -62,11 +72,17 @@ class FoodRepository {
     if (response.statusCode == 200) {
       var responseBody = response.body;
 
-      Map<String, dynamic> jsonBody = jsonDecode(responseBody);
+      var responseBodyMap = jsonDecode(responseBody);
+      var responseBodyConverted = Map.from(responseBodyMap);
+      if (responseBodyConverted.values.first == null) {
+        return 'Not Found';
+      } else {
+        Map<String, dynamic> jsonBody = jsonDecode(responseBody);
 
-      var details = Map.from(jsonBody.values.first[0]);
+        var details = Map.from(jsonBody.values.first[0]);
 
-      return details['strInstructions'];
+        return details['strInstructions'];
+      }
     } else {
       //show error
       return 'Not Found';

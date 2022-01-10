@@ -82,7 +82,7 @@ Widget _nameLabel(Food food, bool isHorizontal) => Padding(
     );
 
 Widget _priceLabel(Food food, bool isHorizontal) => Padding(
-      padding: const EdgeInsets.only(bottom: 100.0),
+      padding: EdgeInsets.only(bottom: isHorizontal ? 100 : 50.0),
       child: Align(
         alignment: Alignment.bottomCenter,
         child: SizedBox(

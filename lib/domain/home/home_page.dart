@@ -122,23 +122,28 @@ class HomePageState extends State {
                     ],
                   ),
                 ),
-                //foods
                 _foodList(context),
                 Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(right: 20.0, bottom: 40),
                   child: Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => const SeeMorePage());
+                        _foodController.foodList.isEmpty
+                            ? () {}
+                            : Get.to(() => const SeeMorePage());
                       },
-                      child: const Text(
+                      child: Text(
                         'See More',
-                        style: TextStyle(color: primaryOrange, fontSize: 15),
+                        style: TextStyle(
+                            color: _foodController.foodList.isEmpty
+                                ? Colors.grey
+                                : primaryOrange,
+                            fontSize: 20),
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ],
@@ -156,23 +161,37 @@ Widget _foodList(BuildContext context) {
               color: primaryOrange,
             ),
           )
-        : Padding(
-            padding: const EdgeInsets.only(left: 40.0),
-            child: SizedBox(
-              height: 400,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _foodController.foodList.length < 5
-                    ? _foodController.foodList.length
-                    : 5,
-                itemBuilder: (context, i) => Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: foodCard(context, _foodController.foodList[i]),
+        : _foodController.foodList.isEmpty
+            ? Column(
+                children: const [
+                  Icon(
+                    Icons.search,
+                    size: 70,
+                    color: Colors.grey,
+                  ),
+                  Text(
+                    'Item not Found',
+                    style: TextStyle(fontSize: 30, color: Colors.grey),
+                  )
+                ],
+              )
+            : Padding(
+                padding: const EdgeInsets.only(left: 40.0),
+                child: SizedBox(
+                  height: 400,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _foodController.foodList.length < 5
+                        ? _foodController.foodList.length
+                        : 5,
+                    itemBuilder: (context, i) => Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: foodCard(context, _foodController.foodList[i]),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
   );
 }
 
