@@ -54,7 +54,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
                               shadowColor: Colors.grey.withOpacity(0.3),
                               color: Colors.transparent,
                               elevation: 40,
-                              child: foodCard(
+                              child: FoodCard(
                                   context, _foodController.foodList[i], false)),
                         );
                       }),

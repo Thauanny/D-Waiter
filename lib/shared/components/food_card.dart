@@ -1,11 +1,10 @@
-import 'package:d_waiter/controllers/food_controller.dart';
 import 'package:d_waiter/domain/models/food.dart';
 import 'package:d_waiter/domain/views/item_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget foodCard(BuildContext context, Food food, [isHorizontal = true]) {
+Widget FoodCard(BuildContext context, Food food, [isHorizontal = true]) {
   return InkWell(
     onTap: () {
       Get.to(() => ItemPage(food));

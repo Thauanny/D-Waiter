@@ -1,5 +1,6 @@
 import 'package:d_waiter/domain/home/home_page.dart';
 import 'package:d_waiter/shared/colors.dart';
+import 'package:d_waiter/shared/components/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -93,21 +94,8 @@ class LoginPageState extends State {
               ),
             ],
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              fixedSize: const Size(300, 60),
-              primary: Colors.white,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            onPressed: () => Get.off(() => const HomePage()),
-            child: const Text(
-              'Login',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
+          PrimaryButton(
+              context, 'Login', () => Get.off(() => const HomePage())),
         ],
       ),
     );

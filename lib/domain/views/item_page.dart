@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:d_waiter/controllers/food_controller.dart';
 import 'package:d_waiter/shared/colors.dart';
+import 'package:d_waiter/shared/components/primary_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:d_waiter/domain/models/food.dart';
@@ -102,6 +103,10 @@ class _ItemPageState extends State<ItemPage> {
                   style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
+              PrimaryButton(context, 'Adicionar ao Carrinho', () {}),
               const SizedBox(
                 height: 30,
               ),

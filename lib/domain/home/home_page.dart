@@ -187,7 +187,7 @@ Widget _foodList(BuildContext context) {
                         : 5,
                     itemBuilder: (context, i) => Padding(
                       padding: const EdgeInsets.all(10),
-                      child: foodCard(context, _foodController.foodList[i]),
+                      child: FoodCard(context, _foodController.foodList[i]),
                     ),
                   ),
                 ),

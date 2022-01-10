@@ -1,3 +1,5 @@
+import 'package:d_waiter/shared/components/second_button.dart';
+
 import 'login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,22 +43,12 @@ class WelcomePage extends StatelessWidget {
                 top: MediaQuery.of(context).size.height / 1.7,
                 left: MediaQuery.of(context).size.width / 8,
               ),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  fixedSize: const Size(300, 60),
-                  primary: Theme.of(context).colorScheme.secondary,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                onPressed: () => Get.off(() => const LoginPage()),
-                child: const Text(
-                  'Get Started',
-                  style: TextStyle(fontSize: 20),
-                ),
+              child: SecondButton(
+                context,
+                'Get Started',
+                () => Get.off(() => const LoginPage()),
               ),
-            )
+            ),
           ]),
         ],
       ),
