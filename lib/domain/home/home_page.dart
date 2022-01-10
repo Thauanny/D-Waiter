@@ -22,9 +22,6 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State {
   @override
   Widget build(BuildContext context) {
-    double _navSpaceW = MediaQuery.of(context).size.width / 2.05;
-    double _navSpaceH = MediaQuery.of(context).size.height / 8;
-
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -41,34 +38,10 @@ class HomePageState extends State {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: [
-                        _iconLogOut(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/icons/help.svg',
-                            semanticsLabel: 'help',
-                          ),
-                        ),
-                      ],
+                      children: [_iconLogOut(), _iconHelp(context)],
                     ),
                     Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/icons/notes.svg',
-                            semanticsLabel: 'notes',
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            'assets/icons/shopping_cart.svg',
-                            semanticsLabel: 'shopping_cart',
-                          ),
-                        ),
-                      ],
+                      children: [_iconOrders(), _iconCart()],
                     )
                   ],
                 ),
@@ -76,17 +49,7 @@ class HomePageState extends State {
               const SizedBox(
                 height: 50,
               ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Cardápio",
-                  textScaleFactor: 1.5,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-              ),
+              _titleLabel(),
               const SizedBox(
                 height: 50,
               ),
@@ -97,42 +60,7 @@ class HomePageState extends State {
               const SizedBox(
                 height: 50,
               ),
-              const TabBar(
-                  automaticIndicatorColorAdjustment: true,
-                  labelColor: primaryOrange,
-                  isScrollable: true,
-                  indicatorColor: primaryOrange,
-                  labelStyle: TextStyle(color: primaryOrange),
-                  tabs: [
-                    Tab(
-                      child: TextButtonUnderlined(
-                        text: '   Foods    ',
-                        fontSize: 18,
-                        interactable: false,
-                      ),
-                    ),
-                    Tab(
-                      child: TextButtonUnderlined(
-                        text: '   Drinks    ',
-                        fontSize: 18,
-                        interactable: false,
-                      ),
-                    ),
-                    Tab(
-                      child: TextButtonUnderlined(
-                        text: '    Snacks  ',
-                        fontSize: 18,
-                        interactable: false,
-                      ),
-                    ),
-                    Tab(
-                      child: TextButtonUnderlined(
-                        text: '    Sauces  ',
-                        fontSize: 18,
-                        interactable: false,
-                      ),
-                    ),
-                  ]),
+              _tabBar(),
             ],
           ),
         ),
@@ -151,10 +79,54 @@ class HomePageState extends State {
   }
 }
 
-Widget _viewTab1(BuildContext context) => ListView(children: [
-      const SizedBox(
-        height: 70,
+Widget _tabBar() => const TabBar(
+        automaticIndicatorColorAdjustment: true,
+        labelColor: primaryOrange,
+        isScrollable: true,
+        indicatorColor: primaryOrange,
+        labelStyle: TextStyle(color: primaryOrange),
+        tabs: [
+          Tab(
+            child: TextButtonUnderlined(
+              text: '   Foods    ',
+              fontSize: 18,
+              interactable: false,
+            ),
+          ),
+          Tab(
+            child: TextButtonUnderlined(
+              text: '   Drinks    ',
+              fontSize: 18,
+              interactable: false,
+            ),
+          ),
+          Tab(
+            child: TextButtonUnderlined(
+              text: '    Snacks  ',
+              fontSize: 18,
+              interactable: false,
+            ),
+          ),
+          Tab(
+            child: TextButtonUnderlined(
+              text: '    Sauces  ',
+              fontSize: 18,
+              interactable: false,
+            ),
+          ),
+        ]);
+
+Widget _titleLabel() => const Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        "Cardápio",
+        textScaleFactor: 1.5,
+        style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
       ),
+    );
+
+Widget _viewTab1(BuildContext context) => ListView(children: [
       _foodList(context),
       Padding(
         padding: const EdgeInsets.only(right: 20.0, bottom: 40),
@@ -180,6 +152,40 @@ Widget _viewTab1(BuildContext context) => ListView(children: [
         ),
       ),
     ]);
+
+Widget _iconCart() => IconButton(
+      onPressed: () {},
+      icon: SvgPicture.asset(
+        'assets/icons/shopping_cart.svg',
+        semanticsLabel: 'shopping_cart',
+      ),
+    );
+
+Widget _iconOrders() => IconButton(
+      onPressed: () {},
+      icon: SvgPicture.asset(
+        'assets/icons/notes.svg',
+        semanticsLabel: 'notes',
+      ),
+    );
+
+Widget _iconHelp(BuildContext context) => IconButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              title: Text('Instruções'),
+              content: Text('Aqui terão instruções'),
+            );
+          },
+        );
+      },
+      icon: SvgPicture.asset(
+        'assets/icons/help.svg',
+        semanticsLabel: 'help',
+      ),
+    );
 
 Widget _iconLogOut() => IconButton(
       onPressed: () {
@@ -225,7 +231,7 @@ Widget _foodList(BuildContext context) {
                         ? _foodController.foodList.length
                         : 5,
                     itemBuilder: (context, i) => Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: FoodCard(context, _foodController.foodList[i]),
                     ),
                   ),
