@@ -28,7 +28,7 @@ Widget _contentCard(bool isHorizontal, Food food) => Card(
           _imageCard(food, isHorizontal),
           _nameLabel(food, isHorizontal),
           const SizedBox(
-            height: 50,
+            height: 30,
           ),
           _priceLabel(food, isHorizontal)
         ],
@@ -62,7 +62,7 @@ Widget _nameLabel(Food food, bool isHorizontal) => Padding(
       padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
       child: Center(
         child: SizedBox(
-          width: isHorizontal ? 200 : 150,
+          width: 200,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
