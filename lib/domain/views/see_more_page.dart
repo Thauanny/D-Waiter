@@ -41,6 +41,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
                   () => Padding(
                     padding: const EdgeInsets.only(top: 50.0),
                     child: GridView.count(
+                      childAspectRatio: 40 / 50,
                       crossAxisCount: 2,
                       children:
                           List.generate(_foodController.foodList.length, (i) {

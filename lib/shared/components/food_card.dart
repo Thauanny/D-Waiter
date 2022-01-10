@@ -74,7 +74,7 @@ Widget _nameLabel(Food food, bool isHorizontal) => Padding(
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: isHorizontal ? 20 : 30),
+                      fontSize: isHorizontal ? 20 : 28),
                   maxLines: 2,
                 ),
               ),
@@ -100,7 +100,7 @@ Widget _priceLabel(Food food, bool isHorizontal) => Align(
                 style: TextStyle(
                     color: primaryOrange,
                     fontWeight: FontWeight.bold,
-                    fontSize: isHorizontal ? 20 : 30),
+                    fontSize: isHorizontal ? 20 : 28),
                 maxLines: 2,
               ),
             ),
