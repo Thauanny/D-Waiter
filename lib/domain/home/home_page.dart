@@ -26,7 +26,7 @@ class HomePageState extends State {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.height - 400,
+          toolbarHeight: MediaQuery.of(context).size.height - 500,
           elevation: 0,
           backgroundColor: primaryWhite,
           title: Column(
