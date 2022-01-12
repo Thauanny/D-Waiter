@@ -10,6 +10,9 @@ class FoodController extends GetxController {
 
   var searchText = ''.obs;
 
+  var cart = <Food>[].obs;
+  var orders = <Food>[].obs;
+
   @override
   void onInit() {
     fetchFood();

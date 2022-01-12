@@ -1,5 +1,5 @@
 import 'package:d_waiter/domain/models/food.dart';
-import 'package:d_waiter/domain/views/item_page.dart';
+import 'package:d_waiter/domain/item/item_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,12 +1,15 @@
 import 'package:d_waiter/controllers/food_controller.dart';
+import 'package:d_waiter/domain/cart/cart_page.dart';
 import 'package:d_waiter/domain/home/components/text_button_underlined.dart';
-import 'package:d_waiter/domain/views/see_more_page.dart';
+import 'package:d_waiter/domain/orders/orders_page.dart';
 import 'package:d_waiter/domain/welcome_page.dart';
 import 'package:d_waiter/shared/colors.dart';
 import 'package:d_waiter/shared/components/food_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import 'see_more/see_more_page.dart';
 
 final FoodController _foodController = Get.put(FoodController());
 
@@ -154,18 +157,24 @@ Widget _viewTab1(BuildContext context) => ListView(children: [
     ]);
 
 Widget _iconCart() => IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Get.to(() => const CartPage());
+      },
       icon: SvgPicture.asset(
         'assets/icons/shopping_cart.svg',
         semanticsLabel: 'shopping_cart',
+        height: 26,
       ),
     );
 
 Widget _iconOrders() => IconButton(
-      onPressed: () {},
+      onPressed: () {
+        Get.to(() => const OrderPage());
+      },
       icon: SvgPicture.asset(
         'assets/icons/notes.svg',
         semanticsLabel: 'notes',
+        height: 26,
       ),
     );
 
@@ -184,6 +193,7 @@ Widget _iconHelp(BuildContext context) => IconButton(
       icon: SvgPicture.asset(
         'assets/icons/help.svg',
         semanticsLabel: 'help',
+        height: 26,
       ),
     );
 
@@ -194,6 +204,7 @@ Widget _iconLogOut() => IconButton(
       },
       icon: SvgPicture.asset(
         'assets/icons/logout.svg',
+        height: 26,
         semanticsLabel: 'logout',
       ),
     );

@@ -68,7 +68,9 @@ class _ItemPageState extends State<ItemPage> {
               ),
               _foodController.foodDetails.value.isEmpty
                   ? const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: primaryOrange,
+                      ),
                     )
                   : _detailsLabel(_foodController.foodDetails.value, context),
               const SizedBox(
@@ -106,7 +108,13 @@ class _ItemPageState extends State<ItemPage> {
               const SizedBox(
                 height: 30,
               ),
-              PrimaryButton(context, 'Adicionar ao Carrinho', () {}),
+              PrimaryButton(context, 'Adicionar ao Carrinho', () {
+                _foodController.cart.add(food);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Adicionado ao carrinho'),
+                  backgroundColor: Colors.green,
+                ));
+              }),
               const SizedBox(
                 height: 30,
               ),
