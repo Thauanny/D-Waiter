@@ -1,30 +1,11 @@
-import 'package:d_waiter/shared/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 
-import 'domain/welcome_page.dart';
+import '/external/datasources/food_source.dart';
+import 'domain/app.dart';
+import 'infra/services/food_service.dart';
 
 void main() {
+  Get.put(FoodServiceImpl(FoodSourceImpl()));
   runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        backgroundColor: primaryOrange,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-            .copyWith(secondary: primaryOrange),
-      ),
-      home: const WelcomePage(),
-    );
-  }
 }
