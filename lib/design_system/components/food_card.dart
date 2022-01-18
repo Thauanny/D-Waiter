@@ -7,7 +7,7 @@ import '../../domain/features/item/item_page.dart';
 import '../colors.dart';
 
 Widget foodCard(BuildContext context, HomeController controller, Food food,
-    [isHorizontal = true]) {
+    [isHorizontal = true, int? index]) {
   return InkWell(
     onTap: () {
       Get.to(() => ItemPage(
@@ -21,26 +21,47 @@ Widget foodCard(BuildContext context, HomeController controller, Food food,
       alignment: Alignment.topCenter,
       children: [
         Container(
-            height: isHorizontal ? 355 : 400,
-            color: isHorizontal ? primaryWhite : Colors.transparent,
-            width: isHorizontal ? 250 : 350,
-            child: _contentCard(isHorizontal, food)),
+          height: isHorizontal ? 355 : 200,
+          color: isHorizontal ? primaryWhite : Colors.transparent,
+          width: isHorizontal ? 250 : MediaQuery.of(context).size.width - 100,
+          child: _contentCard(isHorizontal, food, context),
+        )
       ],
     ),
   );
 }
 
-Widget _contentCard(bool isHorizontal, Food food) => Card(
-      child: Column(
-        children: [
-          _imageCard(food, isHorizontal),
-          _nameLabel(food, isHorizontal),
-          const SizedBox(
-            height: 30,
-          ),
-          _priceLabel(food, isHorizontal)
-        ],
-      ),
+Widget _contentCard(bool isHorizontal, Food food, BuildContext context) => Card(
+      child: isHorizontal
+          ? Column(
+              children: [
+                _imageCard(food, isHorizontal),
+                _nameLabel(food, isHorizontal),
+                const SizedBox(
+                  height: 30,
+                ),
+                _priceLabel(food, isHorizontal)
+              ],
+            )
+          : Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 50.0),
+                  child: _imageCard(food, isHorizontal),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _nameLabel(food, isHorizontal),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _priceLabel(food, isHorizontal)
+                  ],
+                ),
+              ],
+            ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.0),
       ),
@@ -59,15 +80,16 @@ Widget _imageCard(Food food, bool isHorizontal) => Card(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
           food.imageUrls.first,
-          height: isHorizontal ? 150 : 150,
-          width: isHorizontal ? 150 : 150,
+          height: isHorizontal ? 150 : 135,
+          width: isHorizontal ? 150 : 135,
           fit: BoxFit.fill,
         ),
       ),
     );
 
 Widget _nameLabel(Food food, bool isHorizontal) => Padding(
-      padding: EdgeInsets.only(top: isHorizontal ? 50.0 : 25),
+      padding: EdgeInsets.only(
+          top: isHorizontal ? 50.0 : 25, left: isHorizontal ? 0 : 50),
       child: Center(
         child: SizedBox(
           width: 200,

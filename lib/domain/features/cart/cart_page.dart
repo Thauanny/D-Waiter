@@ -27,100 +27,164 @@ class CartPage extends StatelessWidget {
         foregroundColor: primaryOrange,
       ),
       body: Obx(() => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: controller.cart.isEmpty
-                ? Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: height / 3.5),
-                      child: Column(
-                        children: const [
-                          Icon(
-                            Icons.shopping_cart_rounded,
-                            size: 150,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            child: Text(
-                              'No orders yet',
-                              style:
-                                  TextStyle(fontSize: 50, color: Colors.grey),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                : GridView.count(
-                      childAspectRatio: 40 / 50,
-                      crossAxisCount: 2,
-                      children: List.generate(controller.cart.length, (i) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
+            children: [
+              Expanded(
+                child: controller.cart.isEmpty
+                    ? Center(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: height / 3.5),
+                          child: Column(
+                            children: const [
+                              Icon(
+                                Icons.shopping_cart_rounded,
+                                size: 150,
+                                color: Colors.grey,
                               ),
-                              shadowColor: Colors.grey.withOpacity(0.3),
-                              color: Colors.transparent,
-                              elevation: 40,
-                              child: Stack(
-                                children: [
-                                  foodCard(context, controller,
-                                      controller.cart[i], false),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15, right: 20.0),
-                                      child: IconButton(
-                                          onPressed: () =>
-                                              controller.cart.removeAt(i),
-                                          icon: const Icon(
-                                            Icons.delete_rounded,
-                                            color: primaryOrange,
-                                            size: 40,
-                                          )),
-                                    ),
-                                  )
-                                ],
-                              )),
-                        );
-                      }),
-                    ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: PrimaryButton(
-                text: 'Finalizar Pedido Atual',
-                onPressed: () {
-                  controller.orders.value = controller.cart;
-                  // Get.to(() => const OrderPage()); levar para cozinha
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        actions: [
-                          Center(
-                              child: TextButton(
-                                  onPressed: () {
-                                    Get.close(1);
-                                  },
-                                  child: const Text('Ok')))
-                        ],
-                        title: const Text('Revisão de pedido'),
-                        content: const Text(
-                            'Aproveite para revisar observações dos pratos e o pedido antes de ser enviado a cozinha!'),
+                              SizedBox(
+                                child: Text(
+                                  'No orders yet',
+                                  style: TextStyle(
+                                      fontSize: 50, color: Colors.grey),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    : Column(
+                        children: List.generate(controller.cart.length, (i) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                                shadowColor: Colors.grey.withOpacity(0.3),
+                                color: Colors.transparent,
+                                elevation: 40,
+                                child: Stack(
+                                  children: [
+                                    foodCard(context, controller,
+                                        controller.cart[i], false, i),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 50.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          _removeOption(index: i),
+                                          _obsOption(),
+                                          _selectItensOption()
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          );
+                        }),
+                      ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: PrimaryButton(
+                    text: 'Finalizar Pedido Atual',
+                    onPressed: () {
+                      controller.orders.value = controller.cart;
+                      // Get.to(() => const OrderPage()); levar para cozinha
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            actions: [
+                              Center(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        Get.close(1);
+                                      },
+                                      child: const Text('Ok')))
+                            ],
+                            title: const Text('Revisão de pedido'),
+                            content: const Text(
+                                'Aproveite para revisar observações dos pratos e o pedido antes de ser enviado a cozinha!'),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                isActive: controller.cart.isNotEmpty),
-          ),
-        ],
-      )),
+                    isActive: controller.cart.isNotEmpty),
+              ),
+            ],
+          )),
     );
   }
+
+  Widget _removeOption({required int index}) => Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15, right: 55.0),
+          child: IconButton(
+              onPressed: () => controller.cart.removeAt(index),
+              icon: const Icon(
+                Icons.delete_rounded,
+                color: primaryOrange,
+                size: 40,
+              )),
+        ),
+      );
+
+  Widget _obsOption() => Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15, right: 55.0),
+          child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.message_outlined,
+                color: primaryOrange,
+                size: 40,
+              )),
+        ),
+      );
+
+  Widget _selectItensOption() => Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 15, right: 20.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: primaryOrange,
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            height: 40,
+            width: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.remove),
+                  color: Colors.white,
+                  iconSize: 20,
+                ),
+                Text(
+                  '0',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add),
+                  color: Colors.white,
+                  iconSize: 20,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 }
