@@ -98,8 +98,11 @@ class _ItemPageState extends State<ItemPage> {
             _informationLabel('Observações de preparo'),
             SizedBox(
               width: MediaQuery.of(context).size.width - 100,
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                onChanged: (value) {
+                  widget.food.note = value;
+                },
+                decoration: const InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: primaryOrange),
                   ),

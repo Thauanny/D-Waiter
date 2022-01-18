@@ -9,8 +9,8 @@ class HomeController extends GetxController {
 
   RxString searchText = ''.obs;
 
-  RxList cart = <Food>[].obs;
-  RxList orders = <Food>[].obs;
+  RxList<Food> cart = <Food>[].obs;
+  RxList<Food> orders = <Food>[].obs;
   IFoodService foodService;
 
   HomeController(this.foodService) {

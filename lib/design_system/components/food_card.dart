@@ -7,7 +7,7 @@ import '../../domain/features/item/item_page.dart';
 import '../colors.dart';
 
 Widget foodCard(BuildContext context, HomeController controller, Food food,
-    [isHorizontal = true, int? index]) {
+    [isHorizontal = true]) {
   return InkWell(
     onTap: () {
       Get.to(() => ItemPage(

@@ -34,7 +34,7 @@ class OrderPage extends StatelessWidget {
                       child: Column(
                         children: const [
                           Icon(
-                            Icons.my_library_books_rounded,
+                            Icons.shopping_cart_rounded,
                             size: 150,
                             color: Colors.grey,
                           ),
@@ -49,30 +49,25 @@ class OrderPage extends StatelessWidget {
                       ),
                     ),
                   )
-                : Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
-                    child: GridView.count(
-                      childAspectRatio: 40 / 50,
-                      crossAxisCount: 2,
-                      children: List.generate(controller.orders.length, (i) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Card(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              shadowColor: Colors.grey.withOpacity(0.3),
-                              color: Colors.transparent,
-                              elevation: 40,
-                              child: foodCard(
-                                context,
-                                controller,
-                                controller.orders[i],
-                                false,
-                              )),
-                        );
-                      }),
-                    ),
+                : Column(
+                    children: List.generate(controller.cart.length, (i) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 50),
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            shadowColor: Colors.grey.withOpacity(0.3),
+                            color: Colors.transparent,
+                            elevation: 40,
+                            child: Stack(
+                              children: [
+                                foodCard(context, controller,
+                                    controller.cart[i], false),
+                              ],
+                            )),
+                      );
+                    }),
                   ),
           ),
           Padding(

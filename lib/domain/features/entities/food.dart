@@ -11,6 +11,7 @@ class Food {
   List<dynamic> imageUrls;
   double price;
   int id;
+  String? note;
 
   Food({
     required this.name,

@@ -15,6 +15,7 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = (MediaQuery.of(context).size.height);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: 100,
         title: const Text(
@@ -65,7 +66,7 @@ class CartPage extends StatelessWidget {
                                 child: Stack(
                                   children: [
                                     foodCard(context, controller,
-                                        controller.cart[i], false, i),
+                                        controller.cart[i], false),
                                     Padding(
                                       padding:
                                           const EdgeInsets.only(right: 50.0),
@@ -76,7 +77,8 @@ class CartPage extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           _removeOption(index: i),
-                                          _obsOption(),
+                                          _obsOption(
+                                              index: i, context: context),
                                           _selectItensOption()
                                         ],
                                       ),
@@ -134,14 +136,45 @@ class CartPage extends StatelessWidget {
         ),
       );
 
-  Widget _obsOption() => Align(
+  Widget _obsOption({required int index, required BuildContext context}) =>
+      Align(
         alignment: Alignment.topRight,
         child: Padding(
           padding: const EdgeInsets.only(top: 15, right: 55.0),
           child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.message_outlined,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      actions: [
+                        Center(
+                            child: TextButton(
+                                onPressed: () {
+                                  Get.close(1);
+                                },
+                                child: const Text('Ok')))
+                      ],
+                      title: const Text('Observação do pedido'),
+                      content: TextField(
+                        onChanged: (value) {
+                          controller.cart.elementAt(index).note = value;
+                        },
+                        decoration: InputDecoration(
+                          hintText: controller.cart.elementAt(index).note ?? '',
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: primaryOrange),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              icon: Icon(
+                controller.cart.elementAt(index).note == null
+                    ? Icons.message_outlined
+                    : Icons.message,
                 color: primaryOrange,
                 size: 40,
               )),
