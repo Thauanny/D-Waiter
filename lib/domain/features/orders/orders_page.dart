@@ -2,7 +2,9 @@ import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
+import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderPage extends StatelessWidget {
   final HomeController controller;
@@ -13,19 +15,38 @@ class OrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = (MediaQuery.of(context).size.height);
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        title: const Text(
-          'Orders',
-          style: TextStyle(color: Colors.black, fontSize: 28),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: primaryOrange,
-      ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 50.0, top: 50, bottom: 50),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    onPressed: () {
+                      Get.off(() => HomePage());
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                    color: primaryOrange,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width / 2),
+                  child: const Text(
+                    'Orders',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
+            ),
+          ),
           Expanded(
             child: controller.cart.isEmpty
                 ? Center(
@@ -51,22 +72,19 @@ class OrderPage extends StatelessWidget {
                   )
                 : Column(
                     children: List.generate(controller.cart.length, (i) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 50),
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                            ),
-                            shadowColor: Colors.grey.withOpacity(0.3),
-                            color: Colors.transparent,
-                            elevation: 40,
-                            child: Stack(
-                              children: [
-                                foodCard(context, controller,
-                                    controller.cart[i], false),
-                              ],
-                            )),
-                      );
+                      return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          shadowColor: Colors.grey.withOpacity(0.3),
+                          color: Colors.transparent,
+                          elevation: 40,
+                          child: Stack(
+                            children: [
+                              foodCard(context, controller, controller.cart[i],
+                                  false),
+                            ],
+                          ));
                     }),
                   ),
           ),

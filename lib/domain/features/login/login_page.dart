@@ -97,7 +97,7 @@ class LoginPageState extends State {
           ),
           PrimaryButton(
               text: 'Login',
-              onPressed: () => Get.to(
+              onPressed: () => Get.off(
                     () => HomePage(),
                   )),
         ],

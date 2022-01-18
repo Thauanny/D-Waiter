@@ -1,3 +1,5 @@
+import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
+import 'package:d_waiter/domain/in_preparation/in_preparation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,19 +18,38 @@ class CartPage extends StatelessWidget {
     var height = (MediaQuery.of(context).size.height);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        toolbarHeight: 100,
-        title: const Text(
-          'Cart',
-          style: TextStyle(color: Colors.black, fontSize: 28),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: primaryOrange,
-      ),
       body: Obx(() => Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 50.0, top: 50, bottom: 50),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        onPressed: () {
+                          Get.off(() => HomePage());
+                        },
+                        icon: const Icon(Icons.arrow_back_ios),
+                        color: primaryOrange,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width / 2),
+                      child: const Text(
+                        'Cart',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Expanded(
                 child: controller.cart.isEmpty
                     ? Center(
@@ -89,24 +110,60 @@ class CartPage extends StatelessWidget {
                         }),
                       ),
               ),
+              controller.cart.isEmpty
+                  ? Container()
+                  : SizedBox(
+                      width: 300,
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text(
+                            'Estimativa de tempo',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: primaryOrange),
+                          ),
+                          Text(
+                            '20:00 min',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: primaryOrange),
+                          ),
+                        ],
+                      ),
+                    ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: PrimaryButton(
                     text: 'Finalizar Pedido Atual',
                     onPressed: () {
                       controller.orders.value = controller.cart;
-                      // Get.to(() => const OrderPage()); levar para cozinha
+
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             actions: [
                               Center(
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Get.close(1);
-                                      },
-                                      child: const Text('Ok')))
+                                child: TextButton(
+                                  onPressed: () {
+                                    Get.close(1);
+                                  },
+                                  child: const Text('Revisar'),
+                                ),
+                              ),
+                              Center(
+                                child: TextButton(
+                                  onPressed: () {
+                                    Get.close(1);
+                                    Get.off(() => const InPreparationPage());
+                                  },
+                                  child: const Text('Enviar'),
+                                ),
+                              )
                             ],
                             title: const Text('Revisão de pedido'),
                             content: const Text(
