@@ -2,7 +2,6 @@ import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
-import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +26,7 @@ class OrderPage extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: IconButton(
                     onPressed: () {
-                      Get.off(() => HomePage());
+                      Get.close(1);
                     },
                     icon: const Icon(Icons.arrow_back_ios),
                     color: primaryOrange,
@@ -48,7 +47,7 @@ class OrderPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: controller.cart.isEmpty
+            child: controller.orders.isEmpty
                 ? Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: height / 3.5),
@@ -71,7 +70,7 @@ class OrderPage extends StatelessWidget {
                     ),
                   )
                 : Column(
-                    children: List.generate(controller.cart.length, (i) {
+                    children: List.generate(controller.orders.length, (i) {
                       return Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50.0),
@@ -81,8 +80,8 @@ class OrderPage extends StatelessWidget {
                           elevation: 40,
                           child: Stack(
                             children: [
-                              foodCard(context, controller, controller.cart[i],
-                                  false),
+                              foodCard(context, controller,
+                                  controller.orders[i], false),
                             ],
                           ));
                     }),
@@ -93,7 +92,7 @@ class OrderPage extends StatelessWidget {
             child: PrimaryButton(
                 text: 'Finalizar atendimento e realizar pagamento',
                 onPressed: () {},
-                isActive: controller.cart.isNotEmpty),
+                isActive: controller.orders.isNotEmpty),
           ),
         ],
       ),

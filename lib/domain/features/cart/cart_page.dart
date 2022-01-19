@@ -30,7 +30,7 @@ class CartPage extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         onPressed: () {
-                          Get.off(() => HomePage());
+                          Get.close(0);
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                         color: primaryOrange,
@@ -140,7 +140,7 @@ class CartPage extends StatelessWidget {
                 child: PrimaryButton(
                     text: 'Finalizar Pedido Atual',
                     onPressed: () {
-                      controller.orders.value = controller.cart;
+                      controller.orders.value = List.from(controller.cart);
 
                       showDialog(
                         context: context,
@@ -159,7 +159,9 @@ class CartPage extends StatelessWidget {
                                 child: TextButton(
                                   onPressed: () {
                                     Get.close(1);
-                                    Get.off(() => const InPreparationPage());
+                                    Get.off(() => InPreparationPage(
+                                          controller: controller,
+                                        ));
                                   },
                                   child: const Text('Enviar'),
                                 ),

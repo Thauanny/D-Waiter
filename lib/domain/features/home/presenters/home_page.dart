@@ -100,7 +100,7 @@ class HomePageState extends State<HomePage> {
 
   Widget _iconCart() => IconButton(
         onPressed: () {
-          Get.off(() => CartPage(controller: widget.controller));
+          Get.to(() => CartPage(controller: widget.controller));
         },
         icon: SvgPicture.asset(
           'assets/icons/shopping_cart.svg',
@@ -111,7 +111,7 @@ class HomePageState extends State<HomePage> {
 
   Widget _iconOrders() => IconButton(
         onPressed: () {
-          Get.off(() => OrderPage(
+          Get.to(() => OrderPage(
                 controller: widget.controller,
               ));
         },

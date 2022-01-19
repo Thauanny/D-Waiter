@@ -1,10 +1,13 @@
 import 'package:d_waiter/design_system/colors.dart';
+import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InPreparationPage extends StatelessWidget {
-  const InPreparationPage({Key? key}) : super(key: key);
+  final HomeController controller;
+  const InPreparationPage({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,9 @@ class InPreparationPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: IconButton(
                 onPressed: () {
-                  Get.off(() => HomePage());
+                  controller.cart.clear();
+
+                  Get.close(1);
                 },
                 icon: const Icon(Icons.arrow_back_ios),
                 color: primaryOrange,
