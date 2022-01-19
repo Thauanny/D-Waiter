@@ -7,7 +7,7 @@ import '../../domain/features/item/item_page.dart';
 import '../colors.dart';
 
 Widget foodCard(BuildContext context, HomeController controller, Food food,
-    [isHorizontal = true]) {
+    [isCardVertical = true]) {
   return InkWell(
     onTap: () {
       Get.to(() => ItemPage(
@@ -34,12 +34,22 @@ Widget foodCard(BuildContext context, HomeController controller, Food food,
     child: Stack(
       alignment: Alignment.topCenter,
       children: [
-        Container(
-          height: isHorizontal ? 355 : 200,
-          color: isHorizontal ? primaryWhite : Colors.transparent,
-          width: isHorizontal ? 250 : MediaQuery.of(context).size.width - 100,
-          child: _contentCard(isHorizontal, food, context),
-        )
+        SizedBox(
+          height: isCardVertical ? 355 : 220,
+          width: isCardVertical ? 250 : MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: isCardVertical ? 50.0 : 0, right: isCardVertical ? 0 : 40),
+            child: _contentCard(isCardVertical, food, context),
+          ),
+        ),
+        isCardVertical
+            ? Container(
+                height: isCardVertical ? 170 : 135,
+                width: isCardVertical ? 170 : 135,
+                color: Colors.transparent,
+                child: _imageCard(food, isCardVertical))
+            : Container()
       ],
     ),
   );
@@ -49,7 +59,9 @@ Widget _contentCard(bool isHorizontal, Food food, BuildContext context) => Card(
       child: isHorizontal
           ? Column(
               children: [
-                _imageCard(food, isHorizontal),
+                const SizedBox(
+                  height: 100,
+                ),
                 _nameLabel(food, isHorizontal),
                 const SizedBox(
                   height: 30,
@@ -94,8 +106,6 @@ Widget _imageCard(Food food, bool isHorizontal) => Card(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
           food.imageUrls.first,
-          height: isHorizontal ? 150 : 135,
-          width: isHorizontal ? 150 : 135,
           fit: BoxFit.fill,
         ),
       ),

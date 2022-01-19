@@ -58,7 +58,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
                                 context,
                                 widget.controller,
                                 widget.controller.foodList[i],
-                                false,
+                                true,
                               )),
                         );
                       }),
