@@ -1,24 +1,19 @@
 import 'dart:convert';
 
-List<Food> foodFromJsonToList(String string) => List<Food>.from(
-      json.decode(string).map(
-            (e) => Food.fromJson(e),
-          ),
-    );
-
 class Food {
   String name;
   List<dynamic> imageUrls;
   double price;
   int id;
   String? note;
+  int quantity;
 
-  Food({
-    required this.name,
-    required this.imageUrls,
-    required this.price,
-    required this.id,
-  });
+  Food(
+      {required this.name,
+      required this.imageUrls,
+      required this.price,
+      required this.id,
+      required this.quantity});
 
   Map<String, dynamic> toMap() {
     return {
@@ -26,6 +21,7 @@ class Food {
       'imageUrl': imageUrls,
       'price': price,
       'id': id,
+      'quantity': quantity
     };
   }
 
@@ -35,6 +31,7 @@ class Food {
       imageUrls: (map['image'] ?? ['', '']),
       price: map['price'] ?? '',
       id: int.parse(map['id'] ?? '0'),
+      quantity: map['quantity'] ?? 1,
     );
   }
 

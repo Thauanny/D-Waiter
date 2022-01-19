@@ -1,5 +1,6 @@
+import 'package:d_waiter/domain/features/entities/food.dart';
 import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
-import 'package:d_waiter/domain/in_preparation/in_preparation.dart';
+import 'package:d_waiter/domain/features/in_preparation/in_preparation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -100,7 +101,9 @@ class CartPage extends StatelessWidget {
                                           _removeOption(index: i),
                                           _obsOption(
                                               index: i, context: context),
-                                          _selectItensOption()
+                                          _selectItensOption(
+                                              food: controller.cart[i],
+                                              index: i)
                                         ],
                                       ),
                                     )
@@ -186,7 +189,10 @@ class CartPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 15, right: 55.0),
           child: IconButton(
-              onPressed: () => controller.cart.removeAt(index),
+              onPressed: () {
+                controller.cart.elementAt(index).quantity = 1;
+                controller.cart.removeAt(index);
+              },
               icon: const Icon(
                 Icons.delete_rounded,
                 color: primaryOrange,
@@ -240,43 +246,57 @@ class CartPage extends StatelessWidget {
         ),
       );
 
-  Widget _selectItensOption() => Align(
-        alignment: Alignment.topRight,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15, right: 20.0),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: primaryOrange,
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-            ),
-            height: 40,
-            width: 120,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove),
-                  color: Colors.white,
-                  iconSize: 20,
-                ),
-                Text(
-                  '0',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.add),
-                  color: Colors.white,
-                  iconSize: 20,
-                ),
-              ],
-            ),
+  Widget _selectItensOption({required Food food, required int index}) {
+    controller.foodQuantity.value = food.quantity;
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15, right: 20.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: primaryOrange,
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
+          height: 40,
+          width: 120,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  if (food.quantity > 1) {
+                    food.quantity--;
+                    controller.foodQuantity.value--;
+                  } else {
+                    controller.cart.removeAt(index);
+                    food.quantity = 1;
+                  }
+                },
+                icon: const Icon(Icons.remove),
+                color: Colors.white,
+                iconSize: 20,
+              ),
+              Text(
+                controller.foodQuantity.value.toString(), //////
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                onPressed: () {
+                  food.quantity++;
+                  controller.foodQuantity.value++;
+                },
+                icon: const Icon(Icons.add),
+                color: Colors.white,
+                iconSize: 20,
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
+  }
 }

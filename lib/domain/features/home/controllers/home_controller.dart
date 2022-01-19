@@ -13,6 +13,8 @@ class HomeController extends GetxController {
   RxList<Food> orders = <Food>[].obs;
   IFoodService foodService;
 
+  RxInt foodQuantity = 1.obs;
+
   HomeController(this.foodService) {
     fetchFood();
   }

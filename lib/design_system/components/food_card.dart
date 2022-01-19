@@ -13,7 +13,21 @@ Widget foodCard(BuildContext context, HomeController controller, Food food,
       Get.to(() => ItemPage(
             food: food,
             onCartPressed: () {
-              controller.cart.add(food);
+              if (controller.cart.isNotEmpty &&
+                  food.id == controller.cart.last.id) {
+                food.quantity++;
+              } else {
+                var exist = false;
+                controller.cart.value.forEach((element) {
+                  if (element.id == food.id) {
+                    food.quantity++;
+                    exist = true;
+                  }
+                });
+                if (!exist) {
+                  controller.cart.add(food);
+                }
+              }
             },
           ));
     },
