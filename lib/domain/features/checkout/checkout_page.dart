@@ -1,15 +1,14 @@
 import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
-import 'package:d_waiter/domain/features/checkout/checkout_page.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrderPage extends StatelessWidget {
+class CheckoutPage extends StatelessWidget {
   final HomeController controller;
 
-  const OrderPage({Key? key, required this.controller}) : super(key: key);
+  const CheckoutPage({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class OrderPage extends StatelessWidget {
                   padding: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width / 2),
                   child: const Text(
-                    'Orders',
+                    'Checkout',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 28,
@@ -92,11 +91,7 @@ class OrderPage extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: PrimaryButton(
                 text: 'Finalizar atendimento e realizar pagamento',
-                onPressed: () {
-                  Get.to(() => CheckoutPage(
-                        controller: controller,
-                      ));
-                },
+                onPressed: () {},
                 isActive: controller.orders.isNotEmpty),
           ),
         ],

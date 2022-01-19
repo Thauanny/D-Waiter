@@ -1,6 +1,5 @@
 import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
-import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
