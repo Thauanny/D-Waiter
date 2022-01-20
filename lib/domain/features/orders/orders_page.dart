@@ -103,8 +103,10 @@ class OrderPage extends StatelessWidget {
                                             .elementAt(i)
                                             .quantity
                                             .toString(),
-                                        style: TextStyle(
-                                            color: primaryWhite, fontSize: 30),
+                                        style: const TextStyle(
+                                            color: primaryWhite,
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
