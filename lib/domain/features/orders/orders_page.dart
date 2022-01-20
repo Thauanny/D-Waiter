@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
@@ -83,6 +85,31 @@ class OrderPage extends StatelessWidget {
                             children: [
                               foodCard(context, controller,
                                   controller.orders[i], false),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 50, right: 70),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: primaryOrange,
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    width: 80,
+                                    height: 80,
+                                    child: Center(
+                                      child: Text(
+                                        controller.orders
+                                            .elementAt(i)
+                                            .quantity
+                                            .toString(),
+                                        style: TextStyle(
+                                            color: primaryWhite, fontSize: 30),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ));
                     }),
