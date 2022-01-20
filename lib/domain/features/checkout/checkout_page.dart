@@ -12,6 +12,10 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double total = 0;
+    for (var item in controller.orders) {
+      total += item.price;
+    }
     var height = (MediaQuery.of(context).size.height);
     return Scaffold(
       body: Column(
@@ -47,50 +51,40 @@ class CheckoutPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: controller.orders.isEmpty
-                ? Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: height / 3.5),
-                      child: Column(
-                        children: const [
-                          Icon(
-                            Icons.shopping_cart_rounded,
-                            size: 150,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            child: Text(
-                              'No orders yet',
-                              style:
-                                  TextStyle(fontSize: 50, color: Colors.grey),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                : Column(
-                    children: List.generate(controller.orders.length, (i) {
-                      return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          shadowColor: Colors.grey.withOpacity(0.3),
-                          color: Colors.transparent,
-                          elevation: 40,
-                          child: Stack(
-                            children: [
-                              foodCard(context, controller,
-                                  controller.orders[i], false),
-                            ],
-                          ));
-                    }),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Paymant'),
+                ),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Table Nuber'),
+                ),
+                const Card(
+                  child: Text('4'),
+                ),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Payment Method'),
+                ),
+                Card(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [],
+                      )
+                    ],
                   ),
+                ),
+              ],
+            ),
           ),
+          Text(total.toString()),
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: PrimaryButton(
-                text: 'Finalizar atendimento e realizar pagamento',
+                text: 'Complete Order',
                 onPressed: () {},
                 isActive: controller.orders.isNotEmpty),
           ),
