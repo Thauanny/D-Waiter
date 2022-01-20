@@ -72,48 +72,76 @@ class OrderPage extends StatelessWidget {
                       ),
                     ),
                   )
-                : Column(
+                : ListView(
                     children: List.generate(controller.orders.length, (i) {
-                      return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          shadowColor: Colors.grey.withOpacity(0.3),
-                          color: Colors.transparent,
-                          elevation: 40,
-                          child: Stack(
-                            children: [
-                              foodCard(context, controller,
-                                  controller.orders[i], false),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 50, right: 70),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: primaryOrange,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    width: 80,
-                                    height: 80,
-                                    child: Center(
-                                      child: Text(
-                                        controller.orders
-                                            .elementAt(i)
-                                            .quantity
-                                            .toString(),
-                                        style: const TextStyle(
-                                            color: primaryWhite,
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            shadowColor: Colors.grey.withOpacity(0.3),
+                            color: Colors.transparent,
+                            elevation: 40,
+                            child: Stack(
+                              children: [
+                                foodCard(context, controller,
+                                    controller.orders[i], false),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 50, right: 70),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: primaryOrange,
+                                              borderRadius:
+                                                  BorderRadius.circular(100)),
+                                          width: 60,
+                                          height: 60,
+                                          child: Center(
+                                            child: Text(
+                                              controller.orders
+                                                  .elementAt(i)
+                                                  .quantity
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  color: primaryWhite,
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        /* Text(
+                                          controller.orders
+                                                  .elementAt(i)
+                                                  .orderAt!
+                                                  .hour
+                                                  .toString() +
+                                              'h' +
+                                              controller.orders
+                                                  .elementAt(i)
+                                                  .orderAt!
+                                                  .minute
+                                                  .toString() +
+                                              'm',
+                                          style: const TextStyle(
+                                              color: primaryOrange,
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold),
+                                        ),*/
+                                      ],
                                     ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ));
+                                )
+                              ],
+                            )),
+                      );
                     }),
                   ),
           ),

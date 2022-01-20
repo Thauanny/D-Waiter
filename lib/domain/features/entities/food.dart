@@ -7,6 +7,7 @@ class Food {
   int id;
   String? note;
   int quantity;
+  DateTime? orderAt;
 
   Food(
       {required this.name,

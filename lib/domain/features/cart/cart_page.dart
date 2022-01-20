@@ -74,8 +74,10 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Column(
+                    : ListView(
                         children: List.generate(controller.cart.length, (i) {
+                          //controller.cart.elementAt(i).orderAt =
+                          //  DateTime.now().toUtc();
                           return Padding(
                             padding: const EdgeInsets.only(left: 50),
                             child: Card(
@@ -110,7 +112,7 @@ class CartPage extends StatelessWidget {
                                   ],
                                 )),
                           );
-                        }),
+                        }, growable: true),
                       ),
               ),
               controller.cart.isEmpty
@@ -143,7 +145,9 @@ class CartPage extends StatelessWidget {
                 child: PrimaryButton(
                     text: 'Finalizar Pedido Atual',
                     onPressed: () {
-                      controller.orders.value = List.from(controller.cart);
+                      controller.cart.value.forEach((element) {
+                        controller.orders.add(element);
+                      });
 
                       showDialog(
                         context: context,
