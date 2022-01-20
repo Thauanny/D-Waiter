@@ -53,15 +53,23 @@ class _ItemPageState extends State<ItemPage> {
         Column(
           children: [
             SizedBox(
-              height: 250,
-              width: 250,
-              child: PageView.builder(
-                  itemCount: widget.food.imageUrls.length,
-                  controller: PageController(viewportFraction: 1),
-                  onPageChanged: (int index) => setState(() => _index = index),
-                  itemBuilder: (_, i) => Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: _imageCard(widget.food, i))),
+              height: 280,
+              width: 280,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                elevation: 40,
+                color: Colors.grey.withOpacity(0.1),
+                child: PageView.builder(
+                    itemCount: widget.food.imageUrls.length,
+                    controller: PageController(viewportFraction: 1),
+                    onPageChanged: (int index) =>
+                        setState(() => _index = index),
+                    itemBuilder: (_, i) => Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: _imageCard(widget.food, i))),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -166,8 +174,6 @@ Widget _imageCard(Food food, int index) => ClipRRect(
       borderRadius: BorderRadius.circular(200),
       child: Image.network(
         food.imageUrls[index],
-        height: 180,
-        width: 180,
         fit: BoxFit.fill,
       ),
     );

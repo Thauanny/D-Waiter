@@ -107,6 +107,8 @@ Widget _imageCard(Food food, bool isHorizontal) => Card(
         child: Image.network(
           food.imageUrls.first,
           fit: BoxFit.fill,
+          height: 150,
+          width: 150,
         ),
       ),
     );
