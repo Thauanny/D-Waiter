@@ -53,8 +53,8 @@ class _ItemPageState extends State<ItemPage> {
         Column(
           children: [
             SizedBox(
-              height: 280,
-              width: 280,
+              height: 260,
+              width: 260,
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),
@@ -72,19 +72,19 @@ class _ItemPageState extends State<ItemPage> {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 40,
             ),
             _imageCountindicators(),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             _nameLabel(widget.food),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             _priceLabel(widget.food),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             const SizedBox(
               height: 30,
@@ -213,7 +213,7 @@ Widget _nameLabel(Food food) => Center(
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                 maxLines: 2,
               ),
             ),
@@ -223,7 +223,7 @@ Widget _nameLabel(Food food) => Center(
     );
 
 Widget _priceLabel(Food food) => SizedBox(
-      width: 100,
+      width: 200,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +236,7 @@ Widget _priceLabel(Food food) => SizedBox(
               style: const TextStyle(
                   color: primaryOrange,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                  fontSize: 25),
               maxLines: 2,
             ),
           ),
