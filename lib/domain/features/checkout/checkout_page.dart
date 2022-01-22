@@ -3,17 +3,26 @@ import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class CheckoutPage extends StatelessWidget {
+class CheckoutPage extends StatefulWidget {
   final HomeController controller;
 
   const CheckoutPage({Key? key, required this.controller}) : super(key: key);
 
   @override
+  State<CheckoutPage> createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  bool _checkedPaypal = false;
+  bool _checkedPix = false;
+  bool _checkedPicpay = false;
+  @override
   Widget build(BuildContext context) {
     double total = 0;
-    for (var item in controller.orders) {
+    for (var item in widget.controller.orders) {
       total += item.price;
     }
     var height = (MediaQuery.of(context).size.height);
@@ -55,41 +64,186 @@ class CheckoutPage extends StatelessWidget {
               children: [
                 const Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Paymant'),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 100.0, bottom: 50),
+                    child: Text(
+                      'Payment',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
                 const Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Table Nuber'),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 100.0, bottom: 25),
+                    child: Text(
+                      'Table Number',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-                const Card(
-                  child: Text('4'),
+                SizedBox(
+                  height: 120,
+                  width: MediaQuery.of(context).size.width - 400,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Divider(
+                            color: Colors.grey,
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Text(
+                              '4',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            color: Colors.black,
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
                 const Align(
                   alignment: Alignment.topLeft,
-                  child: Text('Payment Method'),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 100.0, bottom: 25, top: 25),
+                    child: Text(
+                      'Payment Method',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-                Card(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [],
-                      )
-                    ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 400,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        _PaymentMethod(
+                            payment: 'paypal', checked: _checkedPaypal),
+                        const Divider(
+                          color: Colors.grey,
+                          height: 5,
+                        ),
+                        _PaymentMethod(payment: 'pix', checked: _checkedPix),
+                        const Divider(
+                          color: Colors.grey,
+                          height: 5,
+                        ),
+                        _PaymentMethod(
+                            payment: 'picpay', checked: _checkedPicpay),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Text(total.toString()),
+          Align(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: 200,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Total',
+                    style: TextStyle(
+                        color: primaryOrange,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    total.toString(),
+                    style: const TextStyle(
+                        color: primaryOrange,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: PrimaryButton(
                 text: 'Complete Order',
                 onPressed: () {},
-                isActive: controller.orders.isNotEmpty),
+                isActive: widget.controller.orders.isNotEmpty),
           ),
         ],
       ),
+    );
+  }
+
+  _PaymentMethod({required String payment, required bool checked}) {
+    var _checked = checked;
+    return Row(
+      children: [
+        Checkbox(
+          value: _checked,
+          onChanged: (newValue) {
+            setState(() {
+              _checked = newValue!;
+            });
+          },
+          checkColor: primaryOrange,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: primaryOrange),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SvgPicture.asset(
+                'assets/icons/${payment}.svg',
+                semanticsLabel: '${payment}_icon',
+                height: 5,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+        Text(
+          payment.capitalizeFirst!,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
     );
   }
 }

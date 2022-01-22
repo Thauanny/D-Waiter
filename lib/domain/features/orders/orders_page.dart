@@ -146,9 +146,9 @@ class OrderPage extends StatelessWidget {
                   ),
           ),
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(50.0),
             child: PrimaryButton(
-                text: 'Finalizar atendimento e realizar pagamento',
+                text: 'Finalizar Atendimento \ne Realizar Pagamento',
                 onPressed: () {
                   Get.to(() => CheckoutPage(
                         controller: controller,
