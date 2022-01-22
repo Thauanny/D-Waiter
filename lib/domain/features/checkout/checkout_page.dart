@@ -147,19 +147,61 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     elevation: 5,
                     child: Column(
                       children: [
-                        _PaymentMethod(
-                            payment: 'paypal', checked: _checkedPaypal),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _checkedPaypal,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkedPaypal = value!;
+                                });
+                              },
+                              activeColor: primaryOrange,
+                            ),
+                            _PaymentMethod(
+                              payment: 'paypal',
+                              checked: _checkedPaypal,
+                            ),
+                          ],
+                        ),
                         const Divider(
                           color: Colors.grey,
                           height: 5,
                         ),
-                        _PaymentMethod(payment: 'pix', checked: _checkedPix),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _checkedPix,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkedPix = value!;
+                                });
+                              },
+                              activeColor: primaryOrange,
+                            ),
+                            _PaymentMethod(
+                                payment: 'pix', checked: _checkedPix),
+                          ],
+                        ),
                         const Divider(
                           color: Colors.grey,
                           height: 5,
                         ),
-                        _PaymentMethod(
-                            payment: 'picpay', checked: _checkedPicpay),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: _checkedPicpay,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkedPicpay = value!;
+                                });
+                              },
+                              activeColor: primaryOrange,
+                            ),
+                            _PaymentMethod(
+                                payment: 'picpay', checked: _checkedPicpay),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -205,19 +247,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  _PaymentMethod({required String payment, required bool checked}) {
-    var _checked = checked;
+  _PaymentMethod({
+    required String payment,
+    required bool checked,
+  }) {
     return Row(
       children: [
-        Checkbox(
-          value: _checked,
-          onChanged: (newValue) {
-            setState(() {
-              _checked = newValue!;
-            });
-          },
-          checkColor: primaryOrange,
-        ),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Container(
