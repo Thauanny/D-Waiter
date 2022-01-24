@@ -37,6 +37,9 @@ class WelcomePage extends StatelessWidget {
               'assets/images/people.svg',
               semanticsLabel: 'people',
               alignment: Alignment.topCenter,
+              fit: BoxFit.fill,
+              height: 600,
+              width: 1200,
             ),
             Padding(
               padding: EdgeInsets.only(

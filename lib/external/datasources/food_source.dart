@@ -40,7 +40,7 @@ class FoodSourceImpl implements IFoodSource {
   @override
   Future<Either<List<Food>, IFoodSourceError>> searchFood(String name) async {
     var response = await client.get(
-      Uri.parse('$_url/foods/$name'),
+      Uri.parse('$_url/foods/food/$name'),
     );
 
     if (response.statusCode == 200) {
@@ -114,7 +114,7 @@ class FoodSourceImpl implements IFoodSource {
   @override
   Future<Either<List<Food>, IFoodSourceError>> searchDrink(String name) async {
     var response = await client.get(
-      Uri.parse('$_url/drinks/$name'),
+      Uri.parse('$_url/drinks/drink/$name'),
     );
 
     if (response.statusCode == 200) {
