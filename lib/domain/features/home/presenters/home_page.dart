@@ -13,7 +13,9 @@ import '../controllers/home_controller.dart';
 import 'see_more_page.dart';
 
 class HomePage extends StatefulWidget {
-  final HomeController controller = HomeController(Get.find<FoodServiceImpl>());
+  final HomeController controller = HomeController(
+    Get.find<FoodServiceImpl>(),
+  );
 
   HomePage({Key? key}) : super(key: key);
 
@@ -69,7 +71,7 @@ class HomePageState extends State<HomePage> {
         ),
       );
 
-  Widget _viewTab1(BuildContext context) => ListView(children: [
+  Widget _foodsTab(BuildContext context) => ListView(children: [
         _foodList(context),
         Padding(
           padding: const EdgeInsets.only(right: 20.0, bottom: 40),
@@ -88,6 +90,35 @@ class HomePageState extends State<HomePage> {
                   'See More',
                   style: TextStyle(
                       color: widget.controller.foodList.isEmpty
+                          ? Colors.grey
+                          : primaryOrange,
+                      fontSize: 20),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ]);
+
+  Widget _drinksTab(BuildContext context) => ListView(children: [
+        _drinkList(context),
+        Padding(
+          padding: const EdgeInsets.only(right: 20.0, bottom: 40),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () {
+                widget.controller.drinksList.isEmpty
+                    ? () {}
+                    : Get.to(() => SeeMorePage(
+                          controller: widget.controller,
+                        ));
+              },
+              child: Obx(
+                () => Text(
+                  'See More',
+                  style: TextStyle(
+                      color: widget.controller.drinksList.isEmpty
                           ? Colors.grey
                           : primaryOrange,
                       fontSize: 20),
@@ -195,6 +226,48 @@ class HomePageState extends State<HomePage> {
                 ),
     );
   }
+  Widget _drinkList(BuildContext context) {
+    return Obx(
+          () => widget.controller.isLoading.value
+          ? const Center(
+        child: CircularProgressIndicator(
+          color: primaryOrange,
+        ),
+      )
+          : widget.controller.drinksList.isEmpty
+          ? Column(
+        children: const [
+          Icon(
+            Icons.search,
+            size: 70,
+            color: Colors.grey,
+          ),
+          Text(
+            'Item not Found',
+            style: TextStyle(fontSize: 30, color: Colors.grey),
+          )
+        ],
+      )
+          : Padding(
+        padding: const EdgeInsets.only(left: 40.0),
+        child: SizedBox(
+          height: 400,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.controller.drinksList.length < 5
+                ? widget.controller.drinksList.length
+                : 5,
+            itemBuilder: (context, i) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: foodCard(context, widget.controller,
+                  widget.controller.drinksList[i]),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _searchBar() => TextField(
       style: const TextStyle(fontSize: 20),
@@ -266,10 +339,10 @@ class HomePageState extends State<HomePage> {
         backgroundColor: primaryWhite,
         body: TabBarView(
           children: [
-            _viewTab1(context),
-            _viewTab1(context),
-            _viewTab1(context),
-            _viewTab1(context)
+            _foodsTab(context),
+            _drinksTab(context),
+            _foodsTab(context),
+            _foodsTab(context)
           ],
         ),
       ),

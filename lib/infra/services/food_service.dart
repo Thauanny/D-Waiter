@@ -24,4 +24,19 @@ class FoodServiceImpl implements IFoodService {
   Future<Either<List<Food>, IFoodSourceError>> searchFood(String name) {
     return foodSource.searchFood(name);
   }
+
+  @override
+  Future<Either<Food, IFoodSourceError>> fetchDrinkById(int id) {
+    return foodSource.fetchDrinkById(id);
+  }
+
+  @override
+  Future<Either<List<Food>, IFoodSourceError>> fetchDrinks() {
+    return foodSource.fetchDrink();
+  }
+
+  @override
+  Future<Either<List<Food>, IFoodSourceError>> searchDrink(String name) {
+    return foodSource.searchDrink(name);
+  }
 }

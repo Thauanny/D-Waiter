@@ -9,4 +9,10 @@ abstract class IFoodService {
   Future<Either<List<Food>, IFoodSourceError>> searchFood(String name);
 
   Future<Either<Food, IFoodSourceError>> fetchFoodById(int id);
+
+  Future<Either<List<Food>, IFoodSourceError>> fetchDrinks();
+
+  Future<Either<List<Food>, IFoodSourceError>> searchDrink(String name);
+
+  Future<Either<Food, IFoodSourceError>> fetchDrinkById(int id);
 }

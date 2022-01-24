@@ -86,4 +86,78 @@ class FoodSourceImpl implements IFoodSource {
       throw response;
     }
   }
+
+  @override
+  Future<Either<List<Food>, IFoodSourceError>> fetchDrink() async {
+    var response = await client.get(
+      Uri.parse('$_url/drinks'),
+    );
+
+    if (response.statusCode == 200) {
+      try {
+        List<dynamic> jsonBody = jsonDecode(response.body);
+        List<Food> foods = [];
+
+        for (var element in jsonBody) {
+          foods.add(Food.fromMap(element));
+        }
+
+        return Left(foods);
+      } catch (e) {
+        return Right(FoodEmptyError());
+      }
+    } else {
+      throw response;
+    }
+  }
+
+  @override
+  Future<Either<List<Food>, IFoodSourceError>> searchDrink(String name) async {
+    var response = await client.get(
+      Uri.parse('$_url/drinks/$name'),
+    );
+
+    if (response.statusCode == 200) {
+      Map<dynamic, dynamic> jsonBody = Map.from(jsonDecode(response.body));
+      try {
+        if (jsonBody.values.first == null) {
+          return Right(FoodNullError());
+        } else {
+          List<Food> foods = [];
+
+          jsonBody.values.first.forEach((element) {
+            foods.add(Food.fromMap(element));
+          });
+
+          return Left(foods);
+        }
+      } catch (e) {
+        return Right(FoodEmptyError());
+      }
+    } else {
+      throw response;
+    }
+  }
+
+  @override
+  Future<Either<Food, IFoodSourceError>> fetchDrinkById(int id) async {
+    var response = await client.get(
+      Uri.parse('$_url/drinks/$id'),
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonBody = Map.from(jsonDecode(response.body));
+      try {
+        if (jsonBody.values.first == null) {
+          return Right(FoodNullError());
+        } else {
+          return Left(Food.fromMap(jsonBody));
+        }
+      } catch (e) {
+        return Right(FoodEmptyError());
+      }
+    } else {
+      throw response;
+    }
+  }
 }
