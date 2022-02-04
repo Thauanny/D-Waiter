@@ -1,9 +1,9 @@
+import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../design_system/components/second_button.dart';
-import '../login/login_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class WelcomePage extends StatelessWidget {
               child: secondButton(
                 context,
                 'Get Started',
-                () => Get.off(() => const LoginPage()),
+                () => Get.off(() => HomePage()),
               ),
             ),
           ]),
