@@ -1,0 +1,22 @@
+{
+    "menu-text": "Menu",
+    "see-more-text" : "See More",
+    "instructions-text": "Instructions",
+    "instructions-info-text": "Here you will have instructions",
+    "item-not-found-text": "Item not found",
+    "search-text": "search",
+    "foods-label-text": "Foods",
+    "drinks-label-text": "Drinks",
+    "snacks-label-text": "Snacks",
+    "sauces-label-text": "Sauces",
+    "food-information-label-text":"food information",
+    "order-notes-label-text": "order notes",
+    "preparation-notes-label-text" : "Preparation notes",
+    "preparation-notes-info-text":"For the return and reasons, call an attendant to exchange or refund the food",
+    "add-to-cart-text": "Add to cart",
+    "added-to-cart-text": "Added to cart",
+    "login-label-text": "Login",
+    "table-number-text": "Table number",
+    "password-text": "Password",
+    "forgot-password-text": "Forgot password?"
+}

@@ -145,10 +145,6 @@ class CartPage extends StatelessWidget {
                 child: PrimaryButton(
                     text: 'Finalizar Pedido Atual',
                     onPressed: () {
-                      controller.cart.value.forEach((element) {
-                        controller.orders.add(element);
-                      });
-
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -159,7 +155,10 @@ class CartPage extends StatelessWidget {
                                   onPressed: () {
                                     Get.close(1);
                                   },
-                                  child: const Text('Revisar'),
+                                  child: const Text(
+                                    'Revisar',
+                                    style: TextStyle(color: primaryOrange),
+                                  ),
                                 ),
                               ),
                               Center(
@@ -169,12 +168,21 @@ class CartPage extends StatelessWidget {
                                     Get.off(() => InPreparationPage(
                                           controller: controller,
                                         ));
+                                    controller.cart.value.forEach((element) {
+                                      controller.orders.add(element);
+                                    });
                                   },
-                                  child: const Text('Enviar'),
+                                  child: const Text(
+                                    'Enviar',
+                                    style: TextStyle(color: primaryOrange),
+                                  ),
                                 ),
                               )
                             ],
-                            title: const Text('Revisão de pedido'),
+                            title: const Text(
+                              'Revisão de pedido',
+                              style: TextStyle(color: primaryOrange),
+                            ),
                             content: const Text(
                                 'Aproveite para revisar observações dos pratos e o pedido antes de ser enviado a cozinha!'),
                           );

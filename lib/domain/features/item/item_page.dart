@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/src/localization_extension.dart';
 
 import '../../../design_system/colors.dart';
 import '../../../design_system/components/primary_button.dart';
@@ -89,7 +90,7 @@ class _ItemPageState extends State<ItemPage> {
             const SizedBox(
               height: 30,
             ),
-            _informationLabel('Informações do prato'),
+            _informationLabel('food-information-label-text'.i18n()),
             const SizedBox(
               height: 10,
             ),
@@ -103,7 +104,7 @@ class _ItemPageState extends State<ItemPage> {
             const SizedBox(
               height: 30,
             ),
-            _informationLabel('Observações de preparo'),
+            _informationLabel('order-notes-label-text'.i18n()),
             SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               child: TextField(
@@ -120,31 +121,32 @@ class _ItemPageState extends State<ItemPage> {
             const SizedBox(
               height: 30,
             ),
-            _informationLabel('Observações de preparo'),
+            _informationLabel('preparation-notes-label-text'.i18n()),
             const SizedBox(
               height: 30,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width - 100,
               height: 100,
-              child: const Text(
-                'Para a devolução e motivos chamar um atendente para realizar a troca ou estorno do prato',
+              child: Text(
+                '"preparation-notes-info-text'.i18n(),
                 softWrap: true,
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.left,
-                style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
               ),
             ),
             const SizedBox(
               height: 30,
             ),
             PrimaryButton(
-                text: 'Adicionar ao Carrinho',
+                text: 'add-to-cart-text'.i18n(),
                 onPressed: () {
                   widget.onCartPressed();
 
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Adicionado ao carrinho'),
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('added-to-cart-text'.i18n()),
                     backgroundColor: Colors.green,
                   ));
                 }),

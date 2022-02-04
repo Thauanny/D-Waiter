@@ -1,0 +1,22 @@
+{
+    "menu-text": "Cardápio",
+    "see-more" : "Veja mais",
+    "instructions-text": "Instruções",
+    "instructions-info-text": "Aqui terão instruções",
+    "item-not-found-text": "Item não encontrado",
+    "search-text": "buscar",
+    "foods-label-text": "Comidas",
+    "drinks-label-text": "Bebidas",
+    "snacks-label-text": "Petiscos",
+    "sauces-label-text": "Molhos",
+    "food-information-label-text": "Informação do prato",
+    "order-notes-label-text": "Observações do pedido",
+    "preparation-notes-label-text" : "Observações do preparo",
+    "preparation-notes-info-text":"Para a devolução e motivos chamar um atendente para realizar a troca ou estorno do prato",
+    "add-to-cart-text": "Adicionar ao carrinho",
+    "added-to-cart-text": "Adicionado ao carrinho",
+    "login-label-text": "Entrar",
+    "table-number-text": "Numero da mesa",
+    "password-text": "Senha",
+    "forgot-password-text": "Esqueceu a senha?"
+}

@@ -3,6 +3,7 @@ import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localization/src/localization_extension.dart';
 
 class SeeMorePage extends StatefulWidget {
   final HomeController controller;
@@ -21,9 +22,9 @@ class _SeeMorePageState extends State<SeeMorePage> {
         foregroundColor: primaryOrange,
         backgroundColor: primaryWhite,
         elevation: 0,
-        title: const Text(
-          'Comidas',
-          style: TextStyle(
+        title: Text(
+          'foods-label-text'.i18n(),
+          style: const TextStyle(
               color: primaryOrange, fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),

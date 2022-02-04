@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:localization/src/localization_extension.dart';
 
 import '../../../design_system/colors.dart';
 import '../../../design_system/components/primary_button.dart';
@@ -43,9 +44,9 @@ class LoginPageState extends State {
                 semanticsLabel: 'login_art',
               ),
               const SizedBox(height: _loginSpace),
-              const Text(
-                '    Login    ',
-                style: TextStyle(
+              Text(
+                'login-label-text'.i18n(),
+                style: const TextStyle(
                   fontSize: 16,
                   shadows: [
                     Shadow(color: Colors.black, offset: Offset(0, -10))
@@ -66,20 +67,21 @@ class LoginPageState extends State {
                     top: MediaQuery.of(context).size.height / 20,
                     left: _loginPadding,
                     right: _loginPadding),
-                child: const TextField(
+                child: TextField(
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: "Número da mesa"),
+                      border: const UnderlineInputBorder(),
+                      labelText: "table-number-text".i18n()),
                   keyboardType: TextInputType.number,
                 ),
               ),
-              const Padding(
-                padding:
-                    EdgeInsets.only(left: _loginPadding, right: _loginPadding),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: _loginPadding, right: _loginPadding),
                 child: TextField(
                   obscureText: true,
                   decoration: InputDecoration(
-                      border: UnderlineInputBorder(), labelText: "Password"),
+                      border: const UnderlineInputBorder(),
+                      labelText: "password-text".i18n()),
                 ),
               ),
               Padding(
@@ -88,7 +90,7 @@ class LoginPageState extends State {
                 child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "Forgot passcode?",
+                      "forgot-password-text".i18n(),
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary),
                     )),
@@ -96,7 +98,7 @@ class LoginPageState extends State {
             ],
           ),
           PrimaryButton(
-              text: 'Login',
+              text: 'login-label-text'.i18n(),
               onPressed: () => Get.off(
                     () => HomePage(),
                   )),

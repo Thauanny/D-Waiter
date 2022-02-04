@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:localization/src/localization_extension.dart';
 
 import '../../../../../../design_system/colors.dart';
 import '../../../../../../design_system/components/food_card.dart';
@@ -24,49 +25,49 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  Widget _tabBar() => const TabBar(
+  Widget _tabBar() => TabBar(
           automaticIndicatorColorAdjustment: true,
           labelColor: primaryOrange,
           isScrollable: true,
           indicatorColor: primaryOrange,
-          labelStyle: TextStyle(color: primaryOrange),
+          labelStyle: const TextStyle(color: primaryOrange),
           tabs: [
             Tab(
               child: TextButtonUnderlined(
-                text: '   Foods    ',
+                text: 'foods-label-text'.i18n(),
                 fontSize: 18,
                 interactable: false,
               ),
             ),
             Tab(
               child: TextButtonUnderlined(
-                text: '   Drinks    ',
+                text: 'drinks-label-text'.i18n(),
                 fontSize: 18,
                 interactable: false,
               ),
             ),
             Tab(
               child: TextButtonUnderlined(
-                text: '    Snacks  ',
+                text: 'snacks-label-text'.i18n(),
                 fontSize: 18,
                 interactable: false,
               ),
             ),
             Tab(
               child: TextButtonUnderlined(
-                text: '    Sauces  ',
+                text: 'sauces-label-text'.i18n(),
                 fontSize: 18,
                 interactable: false,
               ),
             ),
           ]);
 
-  Widget _titleLabel() => const Align(
+  Widget _titleLabel() => Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          "Cardápio",
+          'menu-text'.i18n(),
           textScaleFactor: 1.5,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
       );
@@ -87,7 +88,7 @@ class HomePageState extends State<HomePage> {
               },
               child: Obx(
                 () => Text(
-                  'See More',
+                  'see-more-text'.i18n(),
                   style: TextStyle(
                       color: widget.controller.foodList.isEmpty
                           ? Colors.grey
@@ -116,7 +117,7 @@ class HomePageState extends State<HomePage> {
               },
               child: Obx(
                 () => Text(
-                  'See More',
+                  'see-more-text'.i18n(),
                   style: TextStyle(
                       color: widget.controller.drinksList.isEmpty
                           ? Colors.grey
@@ -158,9 +159,9 @@ class HomePageState extends State<HomePage> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const AlertDialog(
-                title: Text('Instruções'),
-                content: Text('Aqui terão instruções'),
+              return AlertDialog(
+                title: Text('instructions-text'.i18n()),
+                content: Text('instructions-info-text'.i18n()),
               );
             },
           );
@@ -169,6 +170,7 @@ class HomePageState extends State<HomePage> {
           'assets/icons/help.svg',
           semanticsLabel: 'help',
           height: 26,
+          color: primaryOrange,
         ),
       );
 
@@ -194,15 +196,15 @@ class HomePageState extends State<HomePage> {
             )
           : widget.controller.foodList.isEmpty
               ? Column(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.search,
                       size: 70,
                       color: Colors.grey,
                     ),
                     Text(
-                      'Item not Found',
-                      style: TextStyle(fontSize: 30, color: Colors.grey),
+                      'item-not-found-text'.i18n(),
+                      style: const TextStyle(fontSize: 30, color: Colors.grey),
                     )
                   ],
                 )
@@ -226,64 +228,65 @@ class HomePageState extends State<HomePage> {
                 ),
     );
   }
+
   Widget _drinkList(BuildContext context) {
     return Obx(
-          () => widget.controller.isLoading.value
+      () => widget.controller.isLoading.value
           ? const Center(
-        child: CircularProgressIndicator(
-          color: primaryOrange,
-        ),
-      )
+              child: CircularProgressIndicator(
+                color: primaryOrange,
+              ),
+            )
           : widget.controller.drinksList.isEmpty
-          ? Column(
-        children: const [
-          Icon(
-            Icons.search,
-            size: 70,
-            color: Colors.grey,
-          ),
-          Text(
-            'Item not Found',
-            style: TextStyle(fontSize: 30, color: Colors.grey),
-          )
-        ],
-      )
-          : Padding(
-        padding: const EdgeInsets.only(left: 40.0),
-        child: SizedBox(
-          height: 400,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.controller.drinksList.length < 5
-                ? widget.controller.drinksList.length
-                : 5,
-            itemBuilder: (context, i) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: foodCard(context, widget.controller,
-                  widget.controller.drinksList[i]),
-            ),
-          ),
-        ),
-      ),
+              ? Column(
+                  children: [
+                    const Icon(
+                      Icons.search,
+                      size: 70,
+                      color: Colors.grey,
+                    ),
+                    Text(
+                      'item-not-found-text'.i18n(),
+                      style: const TextStyle(fontSize: 30, color: Colors.grey),
+                    )
+                  ],
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(left: 40.0),
+                  child: SizedBox(
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.controller.drinksList.length < 5
+                          ? widget.controller.drinksList.length
+                          : 5,
+                      itemBuilder: (context, i) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: foodCard(context, widget.controller,
+                            widget.controller.drinksList[i]),
+                      ),
+                    ),
+                  ),
+                ),
     );
   }
 
   Widget _searchBar() => TextField(
       style: const TextStyle(fontSize: 20),
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         fillColor: secondwhite,
         filled: true,
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.search,
           color: primaryOrange,
           size: 35,
         ),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.all(Radius.circular(80)),
         ),
-        hintText: "Search",
+        hintText: "search-text".i18n(),
       ),
       keyboardType: TextInputType.text,
       onChanged: (value) {
