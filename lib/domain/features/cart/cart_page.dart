@@ -1,9 +1,8 @@
 import 'package:d_waiter/domain/features/entities/food.dart';
-import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:d_waiter/domain/features/in_preparation/in_preparation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:localization/src/localization_extension.dart';
 import '../../../design_system/colors.dart';
 import '../../../design_system/components/food_card.dart';
 import '../../../design_system/components/primary_button.dart';
@@ -57,16 +56,16 @@ class CartPage extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(top: height / 3.5),
                           child: Column(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.shopping_cart_rounded,
                                 size: 150,
                                 color: Colors.grey,
                               ),
                               SizedBox(
                                 child: Text(
-                                  'No orders yet',
-                                  style: TextStyle(
+                                  'no-orders-text'.i18n(),
+                                  style: const TextStyle(
                                       fontSize: 50, color: Colors.grey),
                                 ),
                               )
@@ -76,8 +75,6 @@ class CartPage extends StatelessWidget {
                       )
                     : ListView(
                         children: List.generate(controller.cart.length, (i) {
-                          //controller.cart.elementAt(i).orderAt =
-                          //  DateTime.now().toUtc();
                           return Padding(
                             padding: const EdgeInsets.only(left: 50),
                             child: Card(
@@ -230,18 +227,79 @@ class CartPage extends StatelessWidget {
                                 onPressed: () {
                                   Get.close(1);
                                 },
-                                child: const Text('Ok')))
+                                child: Text(
+                                  'save-text'.i18n(),
+                                  style: const TextStyle(
+                                    color: primaryOrange,
+                                    fontSize: 20,
+                                  ),
+                                )))
                       ],
-                      title: const Text('Observação do pedido'),
-                      content: TextField(
-                        onChanged: (value) {
-                          controller.cart.elementAt(index).note = value;
-                        },
-                        decoration: InputDecoration(
-                          hintText: controller.cart.elementAt(index).note ?? '',
-                          focusedBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: primaryOrange),
-                          ),
+                      title: Text('order-information-text'.i18n()),
+                      content: SizedBox(
+                        height: MediaQuery.of(context).size.height - 300,
+                        width: MediaQuery.of(context).size.width - 300,
+                        child: ListView.builder(
+                          itemCount: controller.cart.length,
+                          itemBuilder: (
+                            context,
+                            index,
+                          ) =>
+                              Column(children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(200),
+                                  child: Image.network(
+                                    controller.cart
+                                        .elementAt(index)
+                                        .imageUrls
+                                        .first,
+                                    fit: BoxFit.fill,
+                                    height: 100,
+                                    width: 100,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  controller.cart.elementAt(index).name,
+                                  style: const TextStyle(fontSize: 20),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              'order-notes-label-text'.i18n(),
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextField(
+                              onChanged: (value) {
+                                controller.cart.elementAt(index).note = value;
+                              },
+                              decoration: InputDecoration(
+                                hintText:
+                                    controller.cart.elementAt(index).note ?? '',
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: primaryOrange),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ]),
                         ),
                       ),
                     );
@@ -290,7 +348,7 @@ class CartPage extends StatelessWidget {
                 iconSize: 20,
               ),
               Text(
-                controller.foodQuantity.value.toString(), //////
+                controller.foodQuantity.value.toString(),
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 25,

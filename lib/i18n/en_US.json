@@ -18,5 +18,9 @@
     "login-label-text": "Login",
     "table-number-text": "Table number",
     "password-text": "Password",
-    "forgot-password-text": "Forgot password?"
+    "forgot-password-text": "Forgot password?",
+    "no-orders-text": "No orders yet",
+    "order-information-text": "Write down your order information!",
+    "save-text": "save",
+    "get-started-text": "Get Starded!"
 }

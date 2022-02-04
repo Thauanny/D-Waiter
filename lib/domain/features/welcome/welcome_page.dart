@@ -2,6 +2,7 @@ import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:localization/src/localization_extension.dart';
 
 import '../../../design_system/components/second_button.dart';
 
@@ -32,27 +33,36 @@ class WelcomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.none),
           ),
-          Stack(children: [
-            SvgPicture.asset(
-              'assets/images/people.svg',
-              semanticsLabel: 'people',
-              alignment: Alignment.topCenter,
-              fit: BoxFit.fill,
-              height: 600,
-              width: 1200,
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height / 1.7,
-                left: MediaQuery.of(context).size.width / 8,
+          SizedBox(
+            height: MediaQuery.of(context).size.height - 200,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/images/people.svg',
+                    semanticsLabel: 'people',
+                    alignment: Alignment.topCenter,
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ),
               ),
-              child: secondButton(
-                context,
-                'Get Started',
-                () => Get.off(() => HomePage()),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: secondButton(
+                    context,
+                    'get-started-text'.i18n(),
+                    () => Get.off(() => HomePage()),
+                  ),
+                ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         ],
       ),
     );

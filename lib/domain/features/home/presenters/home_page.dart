@@ -10,7 +10,6 @@ import '../../../../../../design_system/components/text_button_underlined.dart';
 import '../../../../infra/services/food_service.dart';
 import '../../cart/cart_page.dart';
 import '../../orders/orders_page.dart';
-import '../../welcome/welcome_page.dart';
 import '../controllers/home_controller.dart';
 import 'see_more_page.dart';
 

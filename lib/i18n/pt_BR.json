@@ -18,5 +18,9 @@
     "login-label-text": "Entrar",
     "table-number-text": "Numero da mesa",
     "password-text": "Senha",
-    "forgot-password-text": "Esqueceu a senha?"
+    "forgot-password-text": "Esqueceu a senha?",
+    "no-orders-text": "Sem pedidos ainda",
+    "order-information-text": "Anote as informações dos seus pedidos!",
+    "save-text": "salvar",
+    "get-started-text": "Começar a pedir!"
 }
