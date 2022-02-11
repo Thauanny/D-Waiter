@@ -30,9 +30,13 @@ class HomeController extends GetxController {
 
   Future<void> fetchSearchFood() async {
     isLoading.value = true;
-    var foods = await foodService.searchFood(searchText.value);
-    foods.fold((l) => foodList.value = l, (r) => foodList.value = <Food>[]);
-    isLoading.value = false;
+    if (searchText.value.isNotEmpty) {
+      var foods = await foodService.searchFood(searchText.value);
+      foods.fold((l) => foodList.value = l, (r) => foodList.value = <Food>[]);
+      isLoading.value = false;
+    } else {
+      fetchFood();
+    }
   }
 
   Future<void> fetchDrink() async {

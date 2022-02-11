@@ -39,29 +39,29 @@ class FoodSourceImpl implements IFoodSource {
 
   @override
   Future<Either<List<Food>, IFoodSourceError>> searchFood(String name) async {
-    var response = await client.get(
-      Uri.parse('$_url/foods/food/$name'),
-    );
+    if (name.isNotEmpty) {
+      var response = await client.get(
+        Uri.parse('$_url/foods/food/$name'),
+      );
 
-    if (response.statusCode == 200) {
-      Map<dynamic, dynamic> jsonBody = Map.from(jsonDecode(response.body));
-      try {
-        if (jsonBody.values.first == null) {
-          return Right(FoodNullError());
-        } else {
+      if (response.statusCode == 200) {
+        try {
+          List<dynamic> jsonBody = jsonDecode(response.body);
           List<Food> foods = [];
 
-          jsonBody.values.first.forEach((element) {
+          for (var element in jsonBody) {
             foods.add(Food.fromMap(element));
-          });
+          }
 
           return Left(foods);
+        } catch (e) {
+          return Right(FoodEmptyError());
         }
-      } catch (e) {
-        return Right(FoodEmptyError());
+      } else {
+        throw response;
       }
     } else {
-      throw response;
+      return Right(FoodEmptyError());
     }
   }
 

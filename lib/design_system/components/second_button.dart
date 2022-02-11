@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget secondButton(BuildContext context, String text, Function() onPressed) =>
+Widget secondButton(BuildContext context, String text, void Function()? onPressed) =>
     TextButton(
       style: TextButton.styleFrom(
         fixedSize: const Size(300, 60),

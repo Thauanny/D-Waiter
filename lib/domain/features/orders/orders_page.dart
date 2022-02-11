@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';

@@ -18,12 +18,12 @@ Widget foodCard(BuildContext context, HomeController controller, Food food,
                 food.quantity++;
               } else {
                 var exist = false;
-                controller.cart.value.forEach((element) {
+                for (Food element in controller.cart) {
                   if (element.id == food.id) {
                     food.quantity++;
                     exist = true;
                   }
-                });
+                }
                 if (!exist) {
                   controller.cart.add(food);
                 }

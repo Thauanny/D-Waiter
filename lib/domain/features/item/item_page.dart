@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:localization/src/localization_extension.dart';
+import 'package:localization/localization.dart';
 
 import '../../../design_system/colors.dart';
 import '../../../design_system/components/primary_button.dart';

@@ -3,7 +3,7 @@ import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:localization/src/localization_extension.dart';
+import 'package:localization/localization.dart';
 
 class SeeMorePage extends StatefulWidget {
   final HomeController controller;

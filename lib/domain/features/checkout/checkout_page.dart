@@ -1,5 +1,4 @@
 import 'package:d_waiter/design_system/colors.dart';
-import 'package:d_waiter/design_system/components/food_card.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +17,14 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   bool _checkedPaypal = false;
   bool _checkedPix = false;
-  bool _checkedPicpay = false;
+  bool _checkedPicPay = false;
+
   @override
   Widget build(BuildContext context) {
     double total = 0;
     for (var item in widget.controller.orders) {
       total += item.price;
     }
-    var height = (MediaQuery.of(context).size.height);
     return Scaffold(
       body: Column(
         children: [
@@ -158,7 +157,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               },
                               activeColor: primaryOrange,
                             ),
-                            _PaymentMethod(
+                            _paymentMethod(
                               payment: 'paypal',
                               checked: _checkedPaypal,
                             ),
@@ -179,7 +178,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               },
                               activeColor: primaryOrange,
                             ),
-                            _PaymentMethod(
+                            _paymentMethod(
                                 payment: 'pix', checked: _checkedPix),
                           ],
                         ),
@@ -190,16 +189,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         Row(
                           children: [
                             Checkbox(
-                              value: _checkedPicpay,
+                              value: _checkedPicPay,
                               onChanged: (value) {
                                 setState(() {
-                                  _checkedPicpay = value!;
+                                  _checkedPicPay = value!;
                                 });
                               },
                               activeColor: primaryOrange,
                             ),
-                            _PaymentMethod(
-                                payment: 'picpay', checked: _checkedPicpay),
+                            _paymentMethod(
+                                payment: 'picpay', checked: _checkedPicPay),
                           ],
                         )
                       ],
@@ -247,7 +246,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
-  _PaymentMethod({
+  Widget _paymentMethod({
     required String payment,
     required bool checked,
   }) {
@@ -263,7 +262,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: SvgPicture.asset(
-                'assets/icons/${payment}.svg',
+                'assets/icons/$payment.svg',
                 semanticsLabel: '${payment}_icon',
                 height: 5,
                 fit: BoxFit.fill,
