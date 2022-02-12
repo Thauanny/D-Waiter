@@ -1,4 +1,5 @@
 import 'package:d_waiter/domain/features/login/login_page.dart';
+import 'package:d_waiter/infra/services/kitchen_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,8 @@ import 'see_more_page.dart';
 
 class HomePage extends StatefulWidget {
   final HomeController controller = HomeController(
-    Get.find<FoodServiceImpl>(),
+    Get.find<FoodService>(),
+    Get.find<KitchenService>(),
   );
 
   HomePage({Key? key}) : super(key: key);

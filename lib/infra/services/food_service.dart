@@ -5,10 +5,10 @@ import '../../domain/features/entities/food.dart';
 import '../../domain/services/ifood_service.dart';
 import '../datasources/ifoodsource.dart';
 
-class FoodServiceImpl implements IFoodService {
+class FoodService implements IFoodService {
   IFoodSource foodSource;
 
-  FoodServiceImpl(this.foodSource);
+  FoodService(this.foodSource);
 
   @override
   Future<Either<Food, IFoodSourceError>> fetchFoodById(int id) {
