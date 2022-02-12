@@ -38,6 +38,7 @@ class WelcomePage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Stack(children: [
               Expanded(
+                flex: 1,
                 child: Align(
                   alignment: Alignment.center,
                   child: SvgPicture.asset(

@@ -20,7 +20,7 @@
     "password-text": "Password",
     "forgot-password-text": "Forgot password?",
     "no-orders-text": "No orders yet",
-    "order-information-text": "Write down your order information!",
+    "order-information-text": "Write down your orders information! (1 - fist plate, 2 - second plate) ",
     "save-text": "save",
     "get-started-text": "Get Starded!"
 }

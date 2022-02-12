@@ -238,69 +238,17 @@ class CartPage extends StatelessWidget {
                       ],
                       title: Text('order-information-text'.i18n()),
                       content: SizedBox(
-                        height: MediaQuery.of(context).size.height - 300,
-                        width: MediaQuery.of(context).size.width - 300,
-                        child: ListView.builder(
-                          itemCount: controller.cart.length,
-                          itemBuilder: (
-                            context,
-                            index,
-                          ) =>
-                              Column(children: [
-                            const SizedBox(
-                              height: 20,
+                        child: TextField(
+                          onChanged: (value) {
+                            controller.cart.elementAt(index).note = value;
+                          },
+                          decoration: InputDecoration(
+                            hintText:
+                                controller.cart.elementAt(index).note ?? '',
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(color: primaryOrange),
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(200),
-                                  child: Image.network(
-                                    controller.cart
-                                        .elementAt(index)
-                                        .imageUrls
-                                        .first,
-                                    fit: BoxFit.fill,
-                                    height: 100,
-                                    width: 100,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  controller.cart.elementAt(index).name,
-                                  style: const TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Text(
-                              'order-notes-label-text'.i18n(),
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            TextField(
-                              onChanged: (value) {
-                                controller.cart.elementAt(index).note = value;
-                              },
-                              decoration: InputDecoration(
-                                hintText:
-                                    controller.cart.elementAt(index).note ?? '',
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: primaryOrange),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ]),
+                          ),
                         ),
                       ),
                     );
