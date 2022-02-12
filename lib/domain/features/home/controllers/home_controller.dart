@@ -1,3 +1,5 @@
+import 'package:d_waiter/domain/entities/order.dart';
+import 'package:d_waiter/domain/services/ikitchen_service.dart';
 import 'package:get/get.dart';
 
 import '../../../services/ifood_service.dart';
@@ -12,13 +14,22 @@ class HomeController extends GetxController {
 
   RxList<Food> cart = <Food>[].obs;
   RxList<Food> orders = <Food>[].obs;
+  RxList<Order> ordersReady = <Order>[].obs;
   IFoodService foodService;
+  IKitchenService kitchenService;
 
   RxInt foodQuantity = 1.obs;
 
-  HomeController(this.foodService) {
+  HomeController(this.foodService, this.kitchenService) {
     fetchFood();
     fetchDrink();
+    kitchenService.getOrdersReady().listen((event) {
+      ordersReady.add(event);
+    });
+  }
+
+  void sendOrder(Order order) {
+    kitchenService.send(order);
   }
 
   Future<void> fetchFood() async {
