@@ -1,8 +1,8 @@
-import 'package:d_waiter/domain/features/home/presenters/home_page.dart';
+import 'package:d_waiter/domain/features/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:localization/src/localization_extension.dart';
+import 'package:localization/localization.dart';
 
 import '../../../design_system/components/second_button.dart';
 
@@ -57,7 +57,7 @@ class WelcomePage extends StatelessWidget {
                   child: secondButton(
                     context,
                     'get-started-text'.i18n(),
-                    () => Get.off(() => HomePage()),
+                    () => Get.off(() => const LoginPage()),
                   ),
                 ),
               ),

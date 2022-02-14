@@ -240,8 +240,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: PrimaryButton(
                 text: 'Complete Order',
                 onPressed: () {
-                  widget.controller.kitchenService
-                      .send(Order(table: '1', foods: widget.controller.orders));
+                  widget.controller.kitchenService.send(Order(
+                    table: '1',
+                    foods: widget.controller.orders,
+                    type: OrderType.fast,
+                  ));
                 },
                 isActive: widget.controller.orders.isNotEmpty),
           ),
