@@ -1,5 +1,6 @@
 import 'package:d_waiter/design_system/colors.dart';
 import 'package:d_waiter/design_system/components/primary_button.dart';
+import 'package:d_waiter/domain/entities/order.dart';
 import 'package:d_waiter/domain/features/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -238,7 +239,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
             padding: const EdgeInsets.all(30.0),
             child: PrimaryButton(
                 text: 'Complete Order',
-                onPressed: () {},
+                onPressed: () {
+                  widget.controller.kitchenService
+                      .send(Order(table: '1', foods: widget.controller.orders));
+                },
                 isActive: widget.controller.orders.isNotEmpty),
           ),
         ],
