@@ -300,57 +300,69 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.height - 500,
-          elevation: 0,
-          backgroundColor: primaryWhite,
-          title: Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: widget.controller.foodList.isEmpty
+          ? Scaffold(
+              body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Icon(Icons.error),
+                  Text("Erro ao carregar dados")
+                ],
+              ),
+            ))
+          : Scaffold(
+              appBar: AppBar(
+                toolbarHeight: MediaQuery.of(context).size.height - 500,
+                elevation: 0,
+                backgroundColor: primaryWhite,
+                title: Column(
                   children: [
-                    Row(
-                      children: [_iconLogOut(), _iconHelp(context)],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [_iconLogOut(), _iconHelp(context)],
+                          ),
+                          Row(
+                            children: [_iconOrders(), _iconCart()],
+                          )
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [_iconOrders(), _iconCart()],
-                    )
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    _titleLabel(),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 100,
+                      child: _searchBar(),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    _tabBar(),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 50,
+              resizeToAvoidBottomInset: false,
+              backgroundColor: primaryWhite,
+              body: TabBarView(
+                children: [
+                  _foodsTab(context),
+                  _drinksTab(context),
+                  _foodsTab(context),
+                  _foodsTab(context)
+                ],
               ),
-              _titleLabel(),
-              const SizedBox(
-                height: 50,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 100,
-                child: _searchBar(),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              _tabBar(),
-            ],
-          ),
-        ),
-        resizeToAvoidBottomInset: false,
-        backgroundColor: primaryWhite,
-        body: TabBarView(
-          children: [
-            _foodsTab(context),
-            _drinksTab(context),
-            _foodsTab(context),
-            _foodsTab(context)
-          ],
-        ),
-      ),
+            ),
     );
   }
 }
