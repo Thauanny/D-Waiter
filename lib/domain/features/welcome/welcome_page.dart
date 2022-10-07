@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:localization/localization.dart';
+import '../../../design_system/colors.dart';
 import '../../../design_system/components/second_button.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -11,7 +12,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      color: primaryOrange,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
