@@ -83,7 +83,7 @@ class OrderPage extends StatelessWidget {
                             elevation: 40,
                             child: Stack(
                               children: [
-                                foodCard(context, controller,
+                                FoodCard(context, controller,
                                     controller.orders[i], false),
                                 Align(
                                   alignment: Alignment.topRight,

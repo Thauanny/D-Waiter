@@ -19,6 +19,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.15,
         foregroundColor: primaryOrange,
         backgroundColor: primaryWhite,
         elevation: 0,
@@ -30,7 +31,7 @@ class _SeeMorePageState extends State<SeeMorePage> {
       ),
       backgroundColor: primaryWhite,
       body: Padding(
-        padding: const EdgeInsets.only(top: 50.0),
+        padding: const EdgeInsets.only(top: 20.0),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
@@ -55,11 +56,11 @@ class _SeeMorePageState extends State<SeeMorePage> {
                               shadowColor: Colors.grey.withOpacity(0.3),
                               color: Colors.transparent,
                               elevation: 40,
-                              child: foodCard(
+                              child: FoodCard(
                                 context,
                                 widget.controller,
                                 widget.controller.foodList[i],
-                                true,
+                                false,
                               )),
                         );
                       }),

@@ -5,7 +5,7 @@ import 'package:localization/localization.dart';
 
 import '../../../design_system/colors.dart';
 import '../../../design_system/components/primary_button.dart';
-import '../home/presenters/home_page.dart';
+import '../home/presenters/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

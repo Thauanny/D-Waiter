@@ -87,7 +87,7 @@ class CartPage extends StatelessWidget {
                                 elevation: 40,
                                 child: Stack(
                                   children: [
-                                    foodCard(context, controller,
+                                    FoodCard(context, controller,
                                         controller.cart[i], false),
                                     Padding(
                                       padding:

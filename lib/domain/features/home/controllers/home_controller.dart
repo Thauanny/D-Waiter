@@ -36,6 +36,8 @@ class HomeController extends GetxController {
     isLoading.value = true;
     var foods = await foodService.fetchFoods();
     foods.fold((l) => foodList.value = l, (r) => foodList.value = []);
+    foodList.refresh();
+
     isLoading.value = false;
   }
 
